@@ -1,217 +1,65 @@
 import React, { Component } from "react";
-import { Text, Image } from "react-native";
-import { Container, Content, Card, CardItem, Body } from "native-base";
+import { Text, Image, AsyncStorage } from "react-native";
+import { Container, Content, Card, CardItem, Body, H2, H3 } from "native-base";
+import Accordion from "react-native-accordion";
+import ScheduleCard from "../Components/ScheduleCard";
+import * as firebase from "firebase";
 
-const Tab1 = () => {
-  return (
-    <Container>
-      <Content style={{paddingHorizontal: 5}}>
-        <Card>
-          <CardItem header>
-            <Text>Morning Session</Text>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>Topic: Honouring the Fathers</Text>
-              <Text>Speakers: Nathaniel Bassey & Olumide Iyun</Text>
-            </Body>
-          </CardItem>
-          <CardItem footer>
-            <Text note>Time: 9:00am - 11:00am</Text>
-          </CardItem>
-        </Card>
-        <Card>
-          <CardItem header>
-            <Text>Afternoon Session</Text>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>Topic: Honouring the Fathers</Text>
-              <Text>Speakers: Chingtok IsaakuNathaniel Bassey & Olumide Iyun</Text>
-            </Body>
-          </CardItem>
-          <CardItem footer>
-            <Text note>Time: 9:00am - 11:00am</Text>
-          </CardItem>
-        </Card>
-        <Card>
-          <CardItem header>
-            <Text>Morning Session</Text>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>Topic: Honouring the Fathers</Text>
-              <Text>Speakers: Nathaniel Bassey & Olumide Iyun</Text>
-            </Body>
-          </CardItem>
-          <CardItem footer>
-            <Text note>Time: 9:00am - 11:00am</Text>
-          </CardItem>
-        </Card>
-        <Card>
-          <CardItem header>
-            <Text>Afternoon Session</Text>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>Topic: Honouring the Fathers</Text>
-              <Text>Speakers: Chingtok IsaakuNathaniel Bassey & Olumide Iyun</Text>
-            </Body>
-          </CardItem>
-          <CardItem footer>
-            <Text note>Time: 9:00am - 11:00am</Text>
-          </CardItem>
-        </Card>
-      </Content>
-    </Container>
-  );
-};
+class Tab1 extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      schedule: []
+    };
+
+    this.database = firebase.database();
+  }
+
+  fetchSchedule() {
+    const schedulesRef = this.database.ref("schedule");
+    schedulesRef.on("value", snap => {
+      var temp_schedule = [];
+      snap.forEach(day => {
+        temp_schedule.push(day);
+      });
+
+      //this.setState({schedule: temp_schedule});
+
+      AsyncStorage.setItem("schedules", JSON.stringify(temp_schedule), err => {
+        if (err) {
+          console.log(err);
+        }else{
+          console.log('message');
+        }
+      });
+    });
+  }
+
+  componentWillMount() {
+    this.fetchSchedule();
+  }
+
+  render() {
+    //console.log(this.state.schedule[0].day);
+    return (
+      <Container>
+        <Content style={{ paddingHorizontal: 5 }}>
+          <ScheduleCard day={`Day 1`} />
+          <ScheduleCard day={`Day 2`} />
+          <ScheduleCard day={`Day 3`} />
+        </Content>
+      </Container>
+    );
+  }
+}
 const Tab2 = () => {
   return (
     <Container>
-      <Content style={{paddingHorizontal: 5}}>
-        <Card>
-          <CardItem header>
-            <Text>Morning Session</Text>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>Topic: Honouring the Fathers</Text>
-              <Text>Speakers: Nathaniel Bassey & Olumide Iyun</Text>
-            </Body>
-          </CardItem>
-          <CardItem footer>
-            <Text note>Time: 9:00am - 11:00am</Text>
-          </CardItem>
-        </Card>
-        <Card>
-          <CardItem header>
-            <Text>Afternoon Session</Text>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>Topic: Honouring the Fathers</Text>
-              <Text>Speakers: Chingtok IsaakuNathaniel Bassey & Olumide Iyun</Text>
-            </Body>
-          </CardItem>
-          <CardItem footer>
-            <Text note>Time: 9:00am - 11:00am</Text>
-          </CardItem>
-        </Card>
-        <Card>
-          <CardItem header>
-            <Text>Morning Session</Text>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>Topic: Honouring the Fathers</Text>
-              <Text>Speakers: Nathaniel Bassey & Olumide Iyun</Text>
-            </Body>
-          </CardItem>
-          <CardItem footer>
-            <Text note>Time: 9:00am - 11:00am</Text>
-          </CardItem>
-        </Card>
-        <Card>
-          <CardItem header>
-            <Text>Afternoon Session</Text>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>Topic: Honouring the Fathers</Text>
-              <Text>Speakers: Chingtok IsaakuNathaniel Bassey & Olumide Iyun</Text>
-            </Body>
-          </CardItem>
-          <CardItem footer>
-            <Text note>Time: 9:00am - 11:00am</Text>
-          </CardItem>
-        </Card>
-      </Content>
-    </Container>
-  );
-};
-const Tab3 = () => {
-  return (
-    <Container>
-      <Content style={{paddingHorizontal: 5}}>
-        <Card>
-          <CardItem header>
-            <Text>Morning Session</Text>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>Topic: Honouring the Fathers</Text>
-              <Text>Speakers: Nathaniel Bassey & Olumide Iyun</Text>
-            </Body>
-          </CardItem>
-          <CardItem footer>
-            <Text note>Time: 9:00am - 11:00am</Text>
-          </CardItem>
-        </Card>
-        <Card>
-          <CardItem header>
-            <Text>Afternoon Session</Text>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>Topic: Honouring the Fathers</Text>
-              <Text>Speakers: Chingtok IsaakuNathaniel Bassey & Olumide Iyun</Text>
-            </Body>
-          </CardItem>
-          <CardItem footer>
-            <Text note>Time: 9:00am - 11:00am</Text>
-          </CardItem>
-        </Card>
-        <Card>
-          <CardItem header>
-            <Text>Morning Session</Text>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>Topic: Honouring the Fathers</Text>
-              <Text>Speakers: Nathaniel Bassey & Olumide Iyun</Text>
-            </Body>
-          </CardItem>
-          <CardItem footer>
-            <Text note>Time: 9:00am - 11:00am</Text>
-          </CardItem>
-        </Card>
-        <Card>
-          <CardItem header>
-            <Text>Afternoon Session</Text>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>Topic: Honouring the Fathers</Text>
-              <Text>Speakers: Chingtok IsaakuNathaniel Bassey & Olumide Iyun</Text>
-            </Body>
-          </CardItem>
-          <CardItem footer>
-            <Text note>Time: 9:00am - 11:00am</Text>
-          </CardItem>
-        </Card>
+      <Content style={{ paddingHorizontal: 5 }}>
+        <Text>Topics and Spreakers</Text>
       </Content>
     </Container>
   );
 };
 
-
-const Schedule = () => {
-  return (
-    <Container>
-      <Tabs initialPage={0}>
-        <Tab heading="Tab1">
-          <Tab1 />
-        </Tab>
-        <Tab heading="Tab2">
-          <Tab2 />
-        </Tab>
-        <Tab heading="Tab3">
-          <Tab3 />
-        </Tab>
-      </Tabs>
-    </Container>
-  );
-};
-
-export { Tab1, Tab2, Tab3 };
+export { Tab1, Tab2 };

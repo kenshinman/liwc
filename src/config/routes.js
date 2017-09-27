@@ -7,7 +7,7 @@ import {
 } from "react-navigation";
 import Home from "../screens/Home";
 import About from "../screens/About";
-import { Tab1, Tab2, Tab3 } from "../screens/Schedule";
+import { Tab1, Tab2 } from "../screens/Schedule";
 import Ministers from "../screens/Ministers";
 import Minister from "../screens/Minister";
 import Location from "../screens/Location";
@@ -22,7 +22,7 @@ const ScheduleTabs = TabNavigator({
     screen: Tab1,
     navigationOptions: ({ navigation }) => {
       return {
-        tabBarLabel: "Day 1",
+        tabBarLabel: "Schedule",
       };
     }
   },
@@ -30,22 +30,14 @@ const ScheduleTabs = TabNavigator({
     screen: Tab2,
     navigationOptions: ({ navigation }) => {
       return {
-        tabBarLabel: "Day 2"
-      };
-    }
-  },
-  Day3: {
-    screen: Tab3,
-    navigationOptions: ({ navigation }) => {
-      return {
-        tabBarLabel: "Day 3"
+        tabBarLabel: "Topics"
       };
     }
   },
 },{
   tabBarOptions: {
     style: {
-      backgroundColor: 'black',
+      backgroundColor: 'rgba(41, 128, 185,1)',
     },
   }
 });

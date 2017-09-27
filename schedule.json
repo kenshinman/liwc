@@ -1,0 +1,65 @@
+[
+  {
+    "day": 1,
+    "morning": {
+      "time": "time",
+      "topics": ["faith"], 
+      "description": "description",
+      "speakers": ["Nathaniel Bassey"]
+    },
+    "afternoon": {
+      "time": "time",
+      "topics": ["faith"], 
+      "description": "description",
+      "speakers": ["Nathaniel Bassey"]
+    },
+    "evening": {
+      "time": "time",
+      "topics": ["faith"], 
+      "description": "description",
+      "speakers": ["Nathaniel Bassey"]
+    }
+  },
+  {
+    "day": 2,
+    "morning": {
+      "time": "time",
+      "topics": ["faith"], 
+      "description": "description",
+      "speakers": ["Nathaniel Bassey"]
+    },
+    "afternoon": {
+      "time": "time",
+      "topics": ["faith"], 
+      "description": "description",
+      "speakers": ["Nathaniel Bassey"]
+    },
+    "evening": {
+      "time": "time",
+      "topics": ["faith"], 
+      "description": "description",
+      "speakers": ["Nathaniel Bassey"]
+    }
+  },
+  {
+    "day": 3,
+    "morning": {
+      "time": "time",
+      "topics": ["faith"], 
+      "description": "description",
+      "speakers": ["Nathaniel Bassey"]
+    },
+    "afternoon": {
+      "time": "time",
+      "topics": ["faith"], 
+      "description": "description",
+      "speakers": ["Nathaniel Bassey"]
+    },
+    "evening": {
+      "time": "time",
+      "topics": ["faith"], 
+      "description": "description",
+      "speakers": ["Nathaniel Bassey"]
+    }
+  }
+]

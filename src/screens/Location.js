@@ -24,8 +24,11 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import Icon from "react-native-vector-icons/Ionicons";
 import getDirections from "react-native-google-maps-directions";
 import MapView from "react-native-maps";
-import { OS } from '../helpers/Helpers';
-
+import { OS } from "../helpers/Helpers";
+import {
+  AppInstalledChecker,
+  CheckPackageInstallation
+} from "react-native-check-app-install";
 
 let { width, height } = Dimensions.get("window");
 const ASPECT_RATIO = width / height;
@@ -262,7 +265,17 @@ class Location extends Component {
     };
   }
 
-  watchID: ?number = null;
+  uberInstalled() {
+    AppInstalledChecker.checkURLScheme("facebook") // omit the :// suffix
+      .then(isInstalled => {
+        // isInstalled is true if the app is installed or false if not
+        if(isInstalled){
+          alert('facebook is installed')
+        }else{
+          alert('not installed')
+        }
+      });
+  }
 
   handleGetDirections = () => {
     const { long, lat } = this.state.currentPosition;
@@ -303,6 +316,7 @@ class Location extends Component {
       error => console.log(JSON.stringify(error)),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
+    this.uberInstalled();
   }
 
   render() {
@@ -313,7 +327,8 @@ class Location extends Component {
     const nickname = encodeURIComponent("RCCG King's Court");
     const { dLong, dLat } = destination;
     const { longitude, latitude } = this.state.currentPosition;
-    const uberString = `uber://?client_id=-IPVJi1yPP29rqlA6f-aER9qxj-jIL9Y&action=setPickup&pickup[latitude]=${latitude}&pickup[longitude]=${longitude}&dropoff[latitude]=${dLat}&dropoff[longitude]=${dLong}&dropoff[nickname]=${nickname}`;
+
+    const uberString = `uber://?client_id=-IPVJi1yPP29rqlA6f-aER9qxj-jIL9Y&action=setPickup&pickup=my_location&dropoff[latitude]=${dLat}&dropoff[longitude]=${dLong}&dropoff[nickname]=${nickname}&promo=kehindeo152ue`;
     return (
       <Container>
         <View style={styles.container}>
@@ -370,8 +385,19 @@ class Location extends Component {
         <Card style={[styles.footerIcon, styles.right]}>
           <TouchableWithoutFeedback onPress={this.handleGetDirections}>
             <View style={styles.inner}>
-              <Icon name={`${OS}-map`} color="rgba(41, 128, 185,1.0)" style={{ fontSize: 40 }} />
-              <Text style={[styles.strong, {color: "rgba(41, 128, 185,1.0)", fontSize: 8}]}>Use Map</Text>
+              <Icon
+                name={`${OS}-map`}
+                color="rgba(41, 128, 185,1.0)"
+                style={{ fontSize: 40 }}
+              />
+              <Text
+                style={[
+                  styles.strong,
+                  { color: "rgba(41, 128, 185,1.0)", fontSize: 8 }
+                ]}
+              >
+                Use Map
+              </Text>
             </View>
           </TouchableWithoutFeedback>
         </Card>
@@ -428,7 +454,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: 60,
-    height: 60,
+    height: 60
   }
 });
 

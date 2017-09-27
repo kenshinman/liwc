@@ -21,7 +21,7 @@ import {
 } from "native-base";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Col, Row, Grid } from "react-native-easy-grid";
-import EStyleSheet from "react-native-extended-stylesheet";
+import * as firebase from "firebase";
 import CountDownTimer from "react_native_countdowntimer";
 import HomeButton from "../Components/HomeButton";
 
@@ -35,6 +35,17 @@ export default class Home extends Component {
       ministers: [],
       loading: true
     };
+
+    this.database = firebase.database();
+  }
+
+  componentWillMount() {
+    const liveRef = this.database.ref("liveBroadcast");
+    liveRef.on("value", snap => {
+      snap.forEach(data => {
+        AsyncStorage.setItem("liveData", JSON.stringify(data));
+      });
+    });
   }
 
   render() {
@@ -173,7 +184,7 @@ const styles = StyleSheet.create({
   buttonCol: {
     justifyContent: "flex-end",
     alignItems: "center",
-    flexDirection: "column",
+    flexDirection: "column"
   },
   myButton: {
     height: 80,
@@ -210,6 +221,6 @@ const styles = StyleSheet.create({
   colon: {
     fontSize: 16,
     color: "#fff",
-    color: 'rgba(0,0,0,0.1)'
+    color: "rgba(0,0,0,0.1)"
   }
 });

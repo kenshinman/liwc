@@ -3,6 +3,7 @@ package com.liwc2017;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.rpt.reactnativecheckpackageinstallation.CheckPackageInstallationPackage;
 import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 import com.showlocationservicesdialogbox.LocationServicesDialogBoxPackage;
 import com.airbnb.android.react.maps.MapsPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new CheckPackageInstallationPackage(),
             new ReactNativeYouTube(),
             new LocationServicesDialogBoxPackage(),
             new MapsPackage(),
