@@ -6,42 +6,55 @@ import Accordion from "react-native-accordion";
 const renderHeader = time => {
   return (
     <CardItem header>
-      <Text style={{fontWeight: 'bold', color: '#333'}}>{time}</Text>
+      <Text style={{ fontWeight: "bold", color: "#333" }}>{time}</Text>
     </CardItem>
   );
 };
 
-const renderContent = content => {
+const renderContent = period => {
+  console.log(period);
   return (
     <CardItem>
-      <Text>
-        {content}
-      </Text>
+      <Text>{period.topics}</Text>
     </CardItem>
   );
 };
 
-const ScheduleCard = (props) => {
+const ScheduleCard = ({ content }) => {
+  const { day, morning, afternoon, evening, date } = content;
+  console.log(morning);
   return (
     <Card>
       <CardItem header>
-        <H3>{props.day}</H3>
+        <Text style={styles.cardHeading}>{`Day ${day}`}</Text>
       </CardItem>
       <Accordion
         header={renderHeader("Morning")}
-        content={renderContent("This is morning content")}
+        content={renderContent(morning)}
         easing="easeInOutBounce"
       />
       <Accordion
         header={renderHeader("Afternoon")}
-        content={renderContent("This is afternoon content")}
+        content={renderContent(afternoon)}
+        easing="easeOutCubic"
+      />
+      <Accordion
+        header={renderHeader("Evening")}
+        content={renderContent(evening)}
         easing="easeOutCubic"
       />
       <CardItem footer>
-        <Text>footer</Text>
+        <Text>{`Date: ${date}`}</Text>
       </CardItem>
     </Card>
   );
+};
+
+const styles = {
+  cardHeading: {
+    fontSize: 16,
+    color: "#333"
+  }
 };
 
 export default ScheduleCard;

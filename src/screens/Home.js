@@ -96,7 +96,7 @@ export default class Home extends Component {
                 >
                   <Icon name={`${os}-calendar`} color="#ffffff" size={50} />
                 </Button>
-                <Text style={styles.btnText}>SCHEDULE</Text>
+                <Text style={styles.btnText}>SCHEDULE/{"\n"}TOPICS</Text>
               </Col>
               <Col style={styles.buttonCol}>
                 <Button
