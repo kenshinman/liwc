@@ -42,8 +42,8 @@ const About = () => {
 
 const styles = StyleSheet.create({
   p: {
-    fontSize: 14,
-    fontFamily: "notoserif",
+    fontSize: 16,
+    fontFamily: "Oxygen-Regular",
     textAlign: "auto",
     paddingVertical: 5,
   }

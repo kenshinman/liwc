@@ -109,7 +109,7 @@ class Ministers extends Component {
   }
 
   render() {
-    console.log(this.state.ministers);
+    
     return (
       <Container>
         <ScrollView
@@ -143,12 +143,14 @@ const styles = StyleSheet.create({
     paddingVertical: 5
   },
   title: {
-    fontSize: 16,
-    fontWeight: "bold",
+    fontSize: 18,
+    /*fontWeight: "bold",*/
+    fontFamily: "Dosis-Bold",
     color: "black"
   },
   subtitle: {
-    fontStyle: "italic"
+    fontStyle: "italic",
+    fontFamily: "Oxygen-Regular",
   },
   right: {
     justifyContent: "center",

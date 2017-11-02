@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
   bannerTxt: {
     color: "#fff",
     fontSize: 26,
-    fontWeight: "bold"
+    /*fontWeight: "bold"*/
+    fontFamily: "Dosis-Medium"
   }
 });
 

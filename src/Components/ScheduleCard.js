@@ -12,7 +12,7 @@ const renderHeader = time => {
 };
 
 const renderContent = period => {
-  console.log(period);
+  //console.log(period);
   return (
     <CardItem>
       <Text>{period.topics}</Text>
@@ -22,7 +22,7 @@ const renderContent = period => {
 
 const ScheduleCard = ({ content }) => {
   const { day, morning, afternoon, evening, date } = content;
-  console.log(morning);
+  //console.log(morning);
   return (
     <Card>
       <CardItem header>

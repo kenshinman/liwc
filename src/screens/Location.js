@@ -7,7 +7,8 @@ import {
   Dimensions,
   Geolocation,
   Linking,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Alert
 } from "react-native";
 import {
   Container,
@@ -30,226 +31,12 @@ import {
   CheckPackageInstallation
 } from "react-native-check-app-install";
 
+import { mapStyle } from "../helpers/mapStyle";
+
 let { width, height } = Dimensions.get("window");
 const ASPECT_RATIO = width / height;
 const LATITUDE_DELTA = 0.001; //Very high zoom level
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-
-const mapStyle = [
-  {
-    elementType: "geometry",
-    stylers: [
-      {
-        color: "#ebe3cd"
-      }
-    ]
-  },
-  {
-    elementType: "labels.text.fill",
-    stylers: [
-      {
-        color: "#523735"
-      }
-    ]
-  },
-  {
-    elementType: "labels.text.stroke",
-    stylers: [
-      {
-        color: "#f5f1e6"
-      }
-    ]
-  },
-  {
-    featureType: "administrative",
-    elementType: "geometry.stroke",
-    stylers: [
-      {
-        color: "#c9b2a6"
-      }
-    ]
-  },
-  {
-    featureType: "administrative.land_parcel",
-    elementType: "geometry.stroke",
-    stylers: [
-      {
-        color: "#dcd2be"
-      }
-    ]
-  },
-  {
-    featureType: "administrative.land_parcel",
-    elementType: "labels.text.fill",
-    stylers: [
-      {
-        color: "#ae9e90"
-      }
-    ]
-  },
-  {
-    featureType: "landscape.natural",
-    elementType: "geometry",
-    stylers: [
-      {
-        color: "#dfd2ae"
-      }
-    ]
-  },
-  {
-    featureType: "poi",
-    elementType: "geometry",
-    stylers: [
-      {
-        color: "#dfd2ae"
-      }
-    ]
-  },
-  {
-    featureType: "poi",
-    elementType: "labels.text.fill",
-    stylers: [
-      {
-        color: "#93817c"
-      }
-    ]
-  },
-  {
-    featureType: "poi.park",
-    elementType: "geometry.fill",
-    stylers: [
-      {
-        color: "#a5b076"
-      }
-    ]
-  },
-  {
-    featureType: "poi.park",
-    elementType: "labels.text.fill",
-    stylers: [
-      {
-        color: "#447530"
-      }
-    ]
-  },
-  {
-    featureType: "road",
-    elementType: "geometry",
-    stylers: [
-      {
-        color: "#f5f1e6"
-      }
-    ]
-  },
-  {
-    featureType: "road.arterial",
-    elementType: "geometry",
-    stylers: [
-      {
-        color: "#fdfcf8"
-      }
-    ]
-  },
-  {
-    featureType: "road.highway",
-    elementType: "geometry",
-    stylers: [
-      {
-        color: "#f8c967"
-      }
-    ]
-  },
-  {
-    featureType: "road.highway",
-    elementType: "geometry.stroke",
-    stylers: [
-      {
-        color: "#e9bc62"
-      }
-    ]
-  },
-  {
-    featureType: "road.highway.controlled_access",
-    elementType: "geometry",
-    stylers: [
-      {
-        color: "#e98d58"
-      }
-    ]
-  },
-  {
-    featureType: "road.highway.controlled_access",
-    elementType: "geometry.stroke",
-    stylers: [
-      {
-        color: "#db8555"
-      }
-    ]
-  },
-  {
-    featureType: "road.local",
-    elementType: "labels.text.fill",
-    stylers: [
-      {
-        color: "#806b63"
-      }
-    ]
-  },
-  {
-    featureType: "transit.line",
-    elementType: "geometry",
-    stylers: [
-      {
-        color: "#dfd2ae"
-      }
-    ]
-  },
-  {
-    featureType: "transit.line",
-    elementType: "labels.text.fill",
-    stylers: [
-      {
-        color: "#8f7d77"
-      }
-    ]
-  },
-  {
-    featureType: "transit.line",
-    elementType: "labels.text.stroke",
-    stylers: [
-      {
-        color: "#ebe3cd"
-      }
-    ]
-  },
-  {
-    featureType: "transit.station",
-    elementType: "geometry",
-    stylers: [
-      {
-        color: "#dfd2ae"
-      }
-    ]
-  },
-  {
-    featureType: "water",
-    elementType: "geometry.fill",
-    stylers: [
-      {
-        color: "#b9d3c2"
-      }
-    ]
-  },
-  {
-    featureType: "water",
-    elementType: "labels.text.fill",
-    stylers: [
-      {
-        color: "#92998d"
-      }
-    ]
-  }
-];
 
 class Location extends Component {
   constructor(props) {
@@ -265,14 +52,23 @@ class Location extends Component {
     };
   }
 
-  uberInstalled() {
-    AppInstalledChecker.checkURLScheme("facebook") // omit the :// suffix
+  uberInstalled(uberString) {
+    AppInstalledChecker.checkURLScheme("uber") // omit the :// suffix
       .then(isInstalled => {
         // isInstalled is true if the app is installed or false if not
-        if(isInstalled){
-          alert('facebook is installed')
-        }else{
-          alert('not installed')
+        if (isInstalled) {
+          Linking.openURL(uberString);
+        } else {
+          Alert.alert("Uber Not Installed", "Install now?", [
+            {
+              text: "Yes",
+              onPress: () =>
+                Linking.openURL(
+                  "https://play.google.com/store/apps/details?id=com.ubercab&hl=en"
+                )
+            },
+            { text: "No", onPress: () => {} }
+          ]);
         }
       });
   }
@@ -316,7 +112,6 @@ class Location extends Component {
       error => console.log(JSON.stringify(error)),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
-    this.uberInstalled();
   }
 
   render() {
@@ -371,8 +166,8 @@ class Location extends Component {
         <Card style={[styles.footerIcon, styles.left]}>
           <TouchableWithoutFeedback
             onPress={() => {
-              console.log(uberString);
-              Linking.openURL(uberString);
+              //console.log(uberString);
+              this.uberInstalled(uberString);
             }}
           >
             <Image

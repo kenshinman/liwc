@@ -33,21 +33,42 @@ export default class Home extends Component {
     super(props);
     this.state = {
       ministers: [],
-      loading: true
+      loading: true,
+      meta: {
+        date: "",
+        address: ""
+      }
     };
 
     this.database = firebase.database();
   }
 
   componentWillMount() {
+    //AsyncStorage.removeItem("meta");
     const liveRef = this.database.ref("liveBroadcast");
     liveRef.on("value", snap => {
       snap.forEach(data => {
         AsyncStorage.setItem("liveData", JSON.stringify(data));
       });
     });
+
+    const metaRef = this.database.ref("meta");
+    metaRef.on("value", snap => {
+      if (AsyncStorage.setItem("meta", JSON.stringify(snap))) {
+        this.getData();
+      }
+    });
   }
 
+  getData() {
+    AsyncStorage.getItem("meta").then(json => {
+      if (json) {
+        this.setState({ meta: JSON.parse(json) });
+      } else {
+        console.log("meta => nothing");
+      }
+    });
+  }
   render() {
     return (
       <Image
@@ -62,9 +83,9 @@ export default class Home extends Component {
                 LAGOS{"\n"}INTERNATIONAL{"\n"}WORSHIP{"\n"}CONFERENCE
               </Text>
               <View style={styles.space} />
-              <CountDownTimer
+              {this.state.meta.date ? <CountDownTimer
                 style={{ marginTop: 20 }}
-                date="2017-09-29T00:00:00+00:00"
+                date={this.state.meta.date}
                 days={{ plural: " Days", singular: "Day " }}
                 hours=""
                 mins=""
@@ -75,7 +96,7 @@ export default class Home extends Component {
                 secsStyle={[styles.time, styles.secs]}
                 firstColonStyle={styles.colon}
                 secondColonStyle={styles.colon}
-              />
+              />: <Text>Conference Starts in...</Text>}
             </Row>
             <Row style={styles.bottomRow} size={25}>
               <Col style={styles.buttonCol}>
@@ -153,10 +174,11 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     fontSize: 32,
-    fontWeight: "bold",
+    /*fontWeight: "bold",*/
     textShadowColor: "rgba(0,0,0,0.2)",
     textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 2
+    textShadowRadius: 2,
+    fontFamily: "Dosis-Medium"
   },
   space: {
     height: 20
