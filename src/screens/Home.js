@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Dimensions,
   Platform,
-  AsyncStorage
+  AsyncStorage, ImageBackground
 } from "react-native";
 import {
   Container,
@@ -24,6 +24,8 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import * as firebase from "firebase";
 import CountDownTimer from "react_native_countdowntimer";
 import HomeButton from "../Components/HomeButton";
+
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const os = Platform.OS == "ios" ? "ios" : "md";
 
@@ -71,7 +73,7 @@ export default class Home extends Component {
   }
   render() {
     return (
-      <Image
+      <ImageBackground
         style={styles.imgBg}
         source={require("../../assets/app_bg.jpg")}
         resizeMode="cover"
@@ -164,12 +166,12 @@ export default class Home extends Component {
             </Row>
           </Col>
         </Grid>
-      </Image>
+      </ImageBackground>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   welcomeTxt: {
     color: "white",
     textAlign: "center",
@@ -178,7 +180,8 @@ const styles = StyleSheet.create({
     textShadowColor: "rgba(0,0,0,0.2)",
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 2,
-    fontFamily: "Dosis-Medium"
+    fontFamily: "Dosis-Medium",
+    backgroundColor: 'transparent'
   },
   space: {
     height: 20
@@ -187,7 +190,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    width: Dimensions.get("window").width
+    // width: Dimensions.get("window").width
   },
   mainGrid: {
     flex: 1
@@ -219,7 +222,8 @@ const styles = StyleSheet.create({
   btnText: {
     color: "#fff",
     textAlign: "center",
-    fontSize: 13
+    fontSize: 13,
+    backgroundColor: 'transparent'
   },
   days: {
     backgroundColor: "rgba(46, 204, 113,0.65)"
@@ -243,6 +247,7 @@ const styles = StyleSheet.create({
   colon: {
     fontSize: 16,
     color: "#fff",
-    color: "rgba(0,0,0,0.1)"
+    color: "rgba(0,0,0,0.1)",
+    backgroundColor: 'transparent'
   }
 });

@@ -13,6 +13,7 @@ import {
 } from "native-base";
 import ImageBg from "../Components/ImageBg";
 import HTMLView from "react-native-htmlview";
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const Minister = props => {
   const {
@@ -43,7 +44,7 @@ const Minister = props => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   p: {
     fontSize: 16,
     color: "#222",
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     width: 120,
     borderColor: "#fff",
     borderWidth: 3,
-    borderRadius: 75
+    borderRadius: 60
   },
   name: {
     color: "#fff",

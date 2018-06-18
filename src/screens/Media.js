@@ -4,15 +4,6 @@ import { Container, Content, H3 } from "native-base";
 import * as firebase from "firebase";
 import YouTube from "react-native-youtube";
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyDZdd1IV_7VQ0yivbe-SeTRNkItcLxtsfY",
-//   authDomain: "social-app-9bae0.firebaseapp.com",
-//   databaseURL: "https://social-app-9bae0.firebaseio.com",
-//   projectId: "social-app-9bae0",
-//   storageBucket: "social-app-9bae0.appspot.com"
-// };
-
-//const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 class Media extends Component {
   constructor(props) {
