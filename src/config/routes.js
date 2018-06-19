@@ -7,7 +7,7 @@ import {
 } from "react-navigation";
 import Home from "../screens/Home";
 import About from "../screens/About";
-import { Tab1, Tab2 } from "../screens/Schedule";
+import { Tab1, Tab2, Tab3 } from "../screens/Schedule";
 import Ministers from "../screens/Ministers";
 import Minister from "../screens/Minister";
 import Location from "../screens/Location";
@@ -17,30 +17,41 @@ import Register from "../screens/Register";
 
 const os = Platform.OS === "ios" ? "ios" : "md";
 
-const ScheduleTabs = TabNavigator({
-  Day1: {
-    screen: Tab1,
-    navigationOptions: ({ navigation }) => {
-      return {
-        tabBarLabel: "Schedule",
-      };
-    }
-  },
-  Day2: {
-    screen: Tab2,
-    navigationOptions: ({ navigation }) => {
-      return {
-        tabBarLabel: "Topics"
-      };
-    }
-  },
-},{
-  tabBarOptions: {
-    style: {
-      backgroundColor: 'rgba(41, 128, 185,1)',
+const ScheduleTabs = TabNavigator(
+  {
+    Day1: {
+      screen: Tab1,
+      navigationOptions: ({ navigation }) => {
+        return {
+          tabBarLabel: "Day 1"
+        };
+      }
     },
+    Day2: {
+      screen: Tab2,
+      navigationOptions: ({ navigation }) => {
+        return {
+          tabBarLabel: "Day 2"
+        };
+      }
+    },
+    Day3: {
+      screen: Tab3,
+      navigationOptions: ({ navigation }) => {
+        return {
+          tabBarLabel: "Day 3"
+        };
+      }
+    }
+  },
+  {
+    tabBarOptions: {
+      style: {
+        backgroundColor: "rgba(41, 128, 185,1)"
+      }
+    }
   }
-});
+);
 
 const RootNavigator = StackNavigator(
   {

@@ -1,59 +1,68 @@
 import React, { Component } from "react";
-import { Text, Image } from "react-native";
-import { Container, Content, Card, CardItem, Body, H2, H3 } from "native-base";
+import { Image, View } from "react-native";
+import {
+  Container,
+  Content,
+  Card,
+  CardItem,
+  Body,
+  H2,
+  H3,
+  Text
+} from "native-base";
 import Accordion from "react-native-accordion";
 
-const renderHeader = time => {
-  return (
-    <CardItem header>
-      <Text style={{ fontWeight: "bold", color: "#333" }}>{time}</Text>
-    </CardItem>
-  );
-};
+// const renderHeader = time => {
+//   return (
+//     <CardItem header>
+//       <Text style={{ fontWeight: "bold", color: "#333" }}>{time}</Text>
+//     </CardItem>
+//   );
+// };
 
-const renderContent = period => {
-  //console.log(period);
-  return (
-    <CardItem>
-      <Text>{period.topics}</Text>
-    </CardItem>
-  );
-};
+// const renderContent = period => {
+//   //console.log(period);
+//   return (
+//     <CardItem>
+//       <Text>{period.topics}</Text>
+//     </CardItem>
+//   );
+// };
 
 const ScheduleCard = ({ content }) => {
-  const { day, morning, afternoon, evening, date } = content;
+  // const { day, morning, afternoon, evening, date } = content;
   //console.log(morning);
   return (
     <Card>
-      <CardItem header>
-        <Text style={styles.cardHeading}>{`Day ${day}`}</Text>
-      </CardItem>
-      <Accordion
-        header={renderHeader("Morning")}
-        content={renderContent(morning)}
-        easing="easeInOutBounce"
-      />
-      <Accordion
-        header={renderHeader("Afternoon")}
-        content={renderContent(afternoon)}
-        easing="easeOutCubic"
-      />
-      <Accordion
-        header={renderHeader("Evening")}
-        content={renderContent(evening)}
-        easing="easeOutCubic"
-      />
-      <CardItem footer>
-        <Text>{`Date: ${date}`}</Text>
-      </CardItem>
+      <View style={styles.wrapper}>
+        <View style={styles.time}>
+          <Text style={styles.timeText}>16.00</Text>
+        </View>
+        <View style={styles.details}>
+          <Text>Topic is this</Text>
+          <Text note>Topic is this</Text>
+        </View>
+      </View>
     </Card>
   );
 };
 
 const styles = {
-  cardHeading: {
-    fontSize: 16,
-    color: "#333"
+  wrapper: {
+    flex: 1,
+    flexDirection: "row",
+    minHeight: 60
+  },
+  time: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  details: {
+    flex: 3
+  },
+  timeText: {
+    fontWeight: "600"
   }
 };
 

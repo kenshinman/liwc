@@ -7,7 +7,8 @@ import {
   StyleSheet,
   Dimensions,
   Platform,
-  AsyncStorage, ImageBackground
+  AsyncStorage,
+  ImageBackground
 } from "react-native";
 import {
   Container,
@@ -25,7 +26,7 @@ import * as firebase from "firebase";
 import CountDownTimer from "react_native_countdowntimer";
 import HomeButton from "../Components/HomeButton";
 
-import EStyleSheet from 'react-native-extended-stylesheet';
+import EStyleSheet from "react-native-extended-stylesheet";
 
 const os = Platform.OS == "ios" ? "ios" : "md";
 
@@ -76,8 +77,7 @@ export default class Home extends Component {
       <ImageBackground
         style={styles.imgBg}
         source={require("../../assets/app_bg.jpg")}
-        resizeMode="cover"
-      >
+        resizeMode="cover">
         <Grid style={styles.mainGrid}>
           <Col>
             <Row style={styles.topRow} size={50}>
@@ -85,38 +85,42 @@ export default class Home extends Component {
                 LAGOS{"\n"}INTERNATIONAL{"\n"}WORSHIP{"\n"}CONFERENCE
               </Text>
               <View style={styles.space} />
-              {this.state.meta.date ? <CountDownTimer
-                style={{ marginTop: 20 }}
-                date={this.state.meta.date}
-                days={{ plural: " Days", singular: "Day " }}
-                hours=""
-                mins=""
-                segs=""
-                daysStyle={[styles.time, styles.days]}
-                hoursStyle={[styles.time, styles.hours]}
-                minsStyle={[styles.time, styles.mins]}
-                secsStyle={[styles.time, styles.secs]}
-                firstColonStyle={styles.colon}
-                secondColonStyle={styles.colon}
-              />: <Text>Conference Starts in...</Text>}
+              {this.state.meta.date ? (
+                <CountDownTimer
+                  style={{ marginTop: 20 }}
+                  date={this.state.meta.date}
+                  days={{ plural: " Days", singular: "Day " }}
+                  hours=""
+                  mins=""
+                  segs=""
+                  daysStyle={[styles.time, styles.days]}
+                  hoursStyle={[styles.time, styles.hours]}
+                  minsStyle={[styles.time, styles.mins]}
+                  secsStyle={[styles.time, styles.secs]}
+                  firstColonStyle={styles.colon}
+                  secondColonStyle={styles.colon}
+                />
+              ) : (
+                <Text>Conference Starts in...</Text>
+              )}
             </Row>
             <Row style={styles.bottomRow} size={25}>
               <Col style={styles.buttonCol}>
                 <Button
                   onPress={() => this.props.navigation.navigate("About")}
                   primary={true}
-                  style={[styles.myButton, { backgroundColor: "#e74c3c" }]}
-                >
+                  style={[styles.myButton, { backgroundColor: "#e74c3c" }]}>
                   <Icon name={`${os}-text`} color="#ffffff" size={50} />
                 </Button>
-                <Text style={styles.btnText}>ABOUT{"\n"}LIWC 2017</Text>
+                <Text style={styles.btnText}>
+                  ABOUT{"\n"}LIWC {new Date().getFullYear()}
+                </Text>
               </Col>
               <Col style={styles.buttonCol}>
                 <Button
                   onPress={() => this.props.navigation.navigate("Schedule")}
                   primary={true}
-                  style={[styles.myButton, { backgroundColor: "#f1c40f" }]}
-                >
+                  style={[styles.myButton, { backgroundColor: "#f1c40f" }]}>
                   <Icon name={`${os}-calendar`} color="#ffffff" size={50} />
                 </Button>
                 <Text style={styles.btnText}>SCHEDULE/{"\n"}TOPICS</Text>
@@ -125,8 +129,7 @@ export default class Home extends Component {
                 <Button
                   onPress={() => this.props.navigation.navigate("Ministers")}
                   primary={true}
-                  style={[styles.myButton, { backgroundColor: "#8e44ad" }]}
-                >
+                  style={[styles.myButton, { backgroundColor: "#8e44ad" }]}>
                   <Icon name={`${os}-people`} color="#ffffff" size={50} />
                 </Button>
                 <Text style={styles.btnText}>MINSITERS</Text>
@@ -137,8 +140,7 @@ export default class Home extends Component {
                 <Button
                   onPress={() => this.props.navigation.navigate("Location")}
                   primary={true}
-                  style={[styles.myButton, { backgroundColor: "#7f8c8d" }]}
-                >
+                  style={[styles.myButton, { backgroundColor: "#7f8c8d" }]}>
                   <Icon name={`${os}-pin`} color="#ffffff" size={50} />
                 </Button>
                 <Text style={styles.btnText}>LOCATION</Text>
@@ -147,8 +149,7 @@ export default class Home extends Component {
                 <Button
                   onPress={() => this.props.navigation.navigate("Media")}
                   primary={true}
-                  style={[styles.myButton, { backgroundColor: "#d35400" }]}
-                >
+                  style={[styles.myButton, { backgroundColor: "#d35400" }]}>
                   <Icon name={`${os}-videocam`} color="#ffffff" size={50} />
                 </Button>
                 <Text style={styles.btnText}>LIVE {"/"} MEDIA</Text>
@@ -157,8 +158,7 @@ export default class Home extends Component {
                 <Button
                   onPress={() => this.props.navigation.navigate("Register")}
                   primary={true}
-                  style={[styles.myButton, { backgroundColor: "#2ecc71" }]}
-                >
+                  style={[styles.myButton, { backgroundColor: "#2ecc71" }]}>
                   <Icon name={`${os}-finger-print`} color="#ffffff" size={50} />
                 </Button>
                 <Text style={styles.btnText}>REGISTER</Text>
@@ -181,7 +181,7 @@ const styles = EStyleSheet.create({
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 2,
     fontFamily: "Dosis-Medium",
-    backgroundColor: 'transparent'
+    backgroundColor: "transparent"
   },
   space: {
     height: 20
@@ -189,7 +189,7 @@ const styles = EStyleSheet.create({
   imgBg: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
     // width: Dimensions.get("window").width
   },
   mainGrid: {
@@ -223,7 +223,7 @@ const styles = EStyleSheet.create({
     color: "#fff",
     textAlign: "center",
     fontSize: 13,
-    backgroundColor: 'transparent'
+    backgroundColor: "transparent"
   },
   days: {
     backgroundColor: "rgba(46, 204, 113,0.65)"
@@ -248,6 +248,6 @@ const styles = EStyleSheet.create({
     fontSize: 16,
     color: "#fff",
     color: "rgba(0,0,0,0.1)",
-    backgroundColor: 'transparent'
+    backgroundColor: "transparent"
   }
 });

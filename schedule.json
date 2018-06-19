@@ -1,0 +1,57 @@
+[{
+    "day": 1,
+    "schedule": [{
+        "time": "16.00",
+        "topic": "A Living Sacrifice",
+        "speaker": "Nathaniel Bassey",
+        "description": ""
+      },
+      {
+        "time": "17.00",
+        "topic": "Spiritual stewardship as music miisters",
+        "speaker": "",
+        "description": ""
+      },
+      {
+        "time": "18.00",
+        "topic": "The place of the prayer and the word of God in ministry",
+        "speaker": "",
+        "description": ""
+      },
+      {
+        "time": "19.30",
+        "topic": "Gospel music recording, Production and Promotion Supporting",
+        "speaker": "",
+        "description": ""
+      }
+    ]
+  },
+  {
+    "day": 2,
+    "schedule": [{
+        "time": "16.00",
+        "topic": "Taking your ministry as a business: Organizational ethics",
+        "speaker": "",
+        "description": ""
+      },
+      {
+        "time": "17.00",
+        "topic": "Having a balanced relationship life",
+        "speaker": "",
+        "description": ""
+      },
+      {
+        "time": "18.00",
+        "topic": "The Faith walk Ministers",
+        "speaker": "",
+        "description": ""
+      },
+      {
+        "time": "19.00",
+        "topic": "The Anointing: The true source of inspiration",
+        "speaker": "",
+        "description": ""
+      }
+    ]
+  }
+]
