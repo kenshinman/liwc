@@ -53,5 +53,33 @@
         "description": ""
       }
     ]
+  },
+  {
+    "day": 3,
+    "schedule": [{
+        "time": "09.00",
+        "topic": "Personal and Social branding for you and your label.",
+        "speaker": "",
+        "description": ""
+      },
+      {
+        "time": "10.00",
+        "topic": "Streams of income for your music ministry.",
+        "speaker": "",
+        "description": ""
+      },
+      {
+        "time": "11.00",
+        "topic": "The Art of heart of song writing.",
+        "speaker": "",
+        "description": ""
+      },
+      {
+        "time": "12.00",
+        "topic": "Choosing the right mentor for you.",
+        "speaker": "",
+        "description": ""
+      }
+    ]
   }
 ]

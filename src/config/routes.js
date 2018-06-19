@@ -47,7 +47,7 @@ const ScheduleTabs = TabNavigator(
   {
     tabBarOptions: {
       style: {
-        backgroundColor: "rgba(41, 128, 185,1)"
+        backgroundColor: "rgba(0, 0, 0,0.8)"
       }
     }
   }
