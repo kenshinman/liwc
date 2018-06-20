@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchMinisters } from "../actions/ministersActions";
+import { CachedImage } from "react-native-cached-image";
 import {
   ScrollView,
   Text,
@@ -46,7 +47,11 @@ class Ministers extends Component {
               index: i
             })
           }>
-          <Thumbnail size={100} source={{ uri: img }} />
+          <CachedImage
+            style={{ width: 60, height: 60, borderRadius: 30 }}
+            size={100}
+            source={{ uri: img }}
+          />
           <Body>
             <Text style={styles.title}>{name}</Text>
             <Text note style={styles.subtitle}>

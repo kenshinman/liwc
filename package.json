@@ -15,6 +15,7 @@
     "react-native": "0.47.2",
     "react-native-accordion": "^1.0.1",
     "react-native-android-location-services-dialog-box": "^2.2.1",
+    "react-native-cached-image": "^1.4.3",
     "react-native-check-app-install": "0.0.4",
     "react-native-dropdownalert": "^2.11.0",
     "react-native-easy-grid": "^0.1.15",

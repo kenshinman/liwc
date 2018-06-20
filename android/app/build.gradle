@@ -144,6 +144,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fetch-blob')
     compile project(':react-native-onesignal')
     compile project(':react-native-check-app-install')
     compile project(':react-native-youtube')
