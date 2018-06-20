@@ -2,8 +2,9 @@ import React from "react";
 import { ScrollView, Text, Platform, View } from "react-native";
 import {
   DrawerNavigator,
-  StackNavigator,
-  TabNavigator
+  createStackNavigator,
+  TabNavigator,
+  createTabNavigator
 } from "react-navigation";
 import Home from "../screens/Home";
 import About from "../screens/About";
@@ -17,7 +18,7 @@ import Register from "../screens/Register";
 
 const os = Platform.OS === "ios" ? "ios" : "md";
 
-const ScheduleTabs = TabNavigator(
+const ScheduleTabs = createTabNavigator(
   {
     Day1: {
       screen: Tab1,
@@ -53,7 +54,7 @@ const ScheduleTabs = TabNavigator(
   }
 );
 
-const RootNavigator = StackNavigator(
+const RootNavigator = createStackNavigator(
   {
     Home: {
       screen: Home,
@@ -63,43 +64,49 @@ const RootNavigator = StackNavigator(
     },
     About: {
       screen: About,
-      title: "About LIWC",
+      path: "about",
       navigationOptions: ({ navigation }) => ({
         headerTitle: "ABOUT LIWC 2017"
       })
     },
     Schedule: {
       screen: ScheduleTabs,
+      path: "schedule",
       navigationOptions: ({ navigation }) => ({
         headerTitle: "SCHEDULE"
       })
     },
     Ministers: {
       screen: Ministers,
+      path: "ministers/1",
       navigationOptions: ({ navigation }) => ({
         headerTitle: "MINISTERS"
       })
     },
     Minister: {
       screen: Minister,
+      path: "minister/:index",
       navigationOptions: ({ navigation }) => ({
         headerTitle: `${navigation.state.params.minister.name}`
       })
     },
     Location: {
       screen: Location,
+      path: "location",
       navigationOptions: ({ navigation }) => ({
         headerTitle: "LOCATION"
       })
     },
     Media: {
       screen: Media,
+      path: "media",
       navigationOptions: ({ navigation }) => ({
         headerTitle: "MEDIA"
       })
     },
     Register: {
       screen: Register,
+      path: "register",
       navigationOptions: ({ navigation }) => ({
         headerTitle: "REGISTER"
       })

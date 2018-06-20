@@ -27,11 +27,11 @@ const ScheduleCard = ({ item }) => {
                 <Icon name="contact" style={{ fontSize: 20 }} /> {item.speaker}
               </Text>
             </View>
-            <View style={[styles.footerItem, { flex: 1 }]}>
+            {/* <View style={[styles.footerItem, { flex: 1 }]}>
               <Text note style={[styles.footerItemText]}>
                 Foot
               </Text>
-            </View>
+            </View> */}
           </View>
         </View>
       </View>

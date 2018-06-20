@@ -58,12 +58,6 @@ class Ministers extends Component {
       AsyncStorage.setItem("ministers", JSON.stringify(fresh_ministers));
     });
     this.setMinisters();
-
-    ToastAndroid.show(
-      "Done refreshing",
-      ToastAndroid.SHORT,
-      ToastAndroid.CENTER
-    );
   }
   renderList() {
     return this.state.ministers.map(minister => {
@@ -76,8 +70,8 @@ class Ministers extends Component {
           onPress={() =>
             this.props.navigation.navigate("Minister", {
               minister
-            })}
-        >
+            })
+          }>
           <Thumbnail size={100} source={{ uri: img }} />
           <Body>
             <Text style={styles.title}>{name}</Text>
@@ -109,7 +103,6 @@ class Ministers extends Component {
   }
 
   render() {
-    
     return (
       <Container>
         <ScrollView
@@ -119,15 +112,16 @@ class Ministers extends Component {
               onRefresh={() => this._doRefresh()}
             />
           }
-          style={{ backgroundColor: "#fff" }}
-        >
+          style={{ backgroundColor: "#fff" }}>
           {this.state.loading ? (
             <Spinner color="blue" />
           ) : (
             <List>
-							<Text note style={styles.pullText}>Pull to refresh</Text>
-							{this.renderList()}
-						</List>
+              <Text note style={styles.pullText}>
+                Pull to refresh
+              </Text>
+              {this.renderList()}
+            </List>
           )}
         </ScrollView>
       </Container>
@@ -150,18 +144,18 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontStyle: "italic",
-    fontFamily: "Oxygen-Regular",
+    fontFamily: "Oxygen-Regular"
   },
   right: {
     justifyContent: "center",
     alignItems: "center"
-	},
-	pullText: {
-		textAlign: 'center',
-		fontSize: 8,
-		color: "rgba(0,0,0,0.4)",
-		marginTop: 6
-	}
+  },
+  pullText: {
+    textAlign: "center",
+    fontSize: 8,
+    color: "rgba(0,0,0,0.4)",
+    marginTop: 6
+  }
 });
 
 export default Ministers;

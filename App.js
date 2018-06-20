@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import { StatusBar, View } from "react-native";
-import Home from "./src/screens/Home";
+import { StatusBar, View, Platform } from "react-native";
 import RootNavigator from "./src/config/routes";
 import Orientation from "react-native-orientation-locker";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 EStyleSheet.build({
-  $primaryColoe: "#4534fe"
+  $primaryColor: "#4534fe"
 });
+
+const prefix = Platform.OS == "android" ? "liwc://liwc/" : "liwc://";
 
 export default class App extends Component {
   componentWillMount() {
@@ -17,7 +18,7 @@ export default class App extends Component {
     return (
       <View style={{ flex: 1 }}>
         <StatusBar backgroundColor="black" />
-        <RootNavigator key="nav" />
+        <RootNavigator uriPrefix={prefix} key="nav" />
       </View>
     );
   }

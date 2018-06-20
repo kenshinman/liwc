@@ -1,26 +1,13 @@
 import React, { Component } from "react";
 import {
   View,
-  Image,
-  StatusBar,
   Text,
-  StyleSheet,
-  Dimensions,
   Platform,
   AsyncStorage,
   ImageBackground
 } from "react-native";
-import {
-  Container,
-  Header,
-  Body,
-  Left,
-  Right,
-  Content,
-  Title,
-  Button
-} from "native-base";
-import Icon from "react-native-vector-icons/Ionicons";
+import { Button, Icon } from "native-base";
+// import Icon from "react-native-vector-icons/Ionicons";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import * as firebase from "firebase";
 import CountDownTimer from "react_native_countdowntimer";
@@ -101,7 +88,9 @@ export default class Home extends Component {
                   secondColonStyle={styles.colon}
                 />
               ) : (
-                <Text>Conference Starts in...</Text>
+                <Text style={{ color: "#fff", fontWeight: "600" }}>
+                  Conference Starts in...
+                </Text>
               )}
             </Row>
             <Row style={styles.bottomRow} size={25}>
@@ -110,7 +99,12 @@ export default class Home extends Component {
                   onPress={() => this.props.navigation.navigate("About")}
                   primary={true}
                   style={[styles.myButton, { backgroundColor: "#e74c3c" }]}>
-                  <Icon name={`${os}-text`} color="#ffffff" size={50} />
+                  <Icon
+                    style={{ fontSize: 40 }}
+                    name={`text`}
+                    color="#ffffff"
+                    size={80}
+                  />
                 </Button>
                 <Text style={styles.btnText}>
                   ABOUT{"\n"}LIWC {new Date().getFullYear()}
@@ -121,7 +115,12 @@ export default class Home extends Component {
                   onPress={() => this.props.navigation.navigate("Schedule")}
                   primary={true}
                   style={[styles.myButton, { backgroundColor: "#f1c40f" }]}>
-                  <Icon name={`${os}-calendar`} color="#ffffff" size={50} />
+                  <Icon
+                    style={{ fontSize: 40 }}
+                    name={`calendar`}
+                    color="#ffffff"
+                    size={50}
+                  />
                 </Button>
                 <Text style={styles.btnText}>SCHEDULE/{"\n"}TOPICS</Text>
               </Col>
@@ -130,7 +129,12 @@ export default class Home extends Component {
                   onPress={() => this.props.navigation.navigate("Ministers")}
                   primary={true}
                   style={[styles.myButton, { backgroundColor: "#8e44ad" }]}>
-                  <Icon name={`${os}-people`} color="#ffffff" size={50} />
+                  <Icon
+                    style={{ fontSize: 40 }}
+                    name={`people`}
+                    color="#ffffff"
+                    size={50}
+                  />
                 </Button>
                 <Text style={styles.btnText}>MINSITERS</Text>
               </Col>
@@ -141,7 +145,12 @@ export default class Home extends Component {
                   onPress={() => this.props.navigation.navigate("Location")}
                   primary={true}
                   style={[styles.myButton, { backgroundColor: "#7f8c8d" }]}>
-                  <Icon name={`${os}-pin`} color="#ffffff" size={50} />
+                  <Icon
+                    style={{ fontSize: 40 }}
+                    name={`pin`}
+                    color="#ffffff"
+                    size={50}
+                  />
                 </Button>
                 <Text style={styles.btnText}>LOCATION</Text>
               </Col>
@@ -150,7 +159,12 @@ export default class Home extends Component {
                   onPress={() => this.props.navigation.navigate("Media")}
                   primary={true}
                   style={[styles.myButton, { backgroundColor: "#d35400" }]}>
-                  <Icon name={`${os}-videocam`} color="#ffffff" size={50} />
+                  <Icon
+                    style={{ fontSize: 40 }}
+                    name={`pulse`}
+                    color="#ffffff"
+                    size={50}
+                  />
                 </Button>
                 <Text style={styles.btnText}>LIVE {"/"} MEDIA</Text>
               </Col>
@@ -159,7 +173,12 @@ export default class Home extends Component {
                   onPress={() => this.props.navigation.navigate("Register")}
                   primary={true}
                   style={[styles.myButton, { backgroundColor: "#2ecc71" }]}>
-                  <Icon name={`${os}-finger-print`} color="#ffffff" size={50} />
+                  <Icon
+                    style={{ fontSize: 40 }}
+                    name={`finger-print`}
+                    color="#ffffff"
+                    size={50}
+                  />
                 </Button>
                 <Text style={styles.btnText}>REGISTER</Text>
               </Col>
