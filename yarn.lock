@@ -3863,6 +3863,12 @@ react-native-maps@^0.16.2:
   version "0.16.4"
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.16.4.tgz#c18c3cab8cd0ce05431cd74dac11a39afaa579e4"
 
+react-native-onesignal@^3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-3.2.4.tgz#8c5bb9743f415499cd5eb36e56e6e604f201d12d"
+  dependencies:
+    invariant "^2.2.2"
+
 react-native-orientation-locker@^1.0.3:
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/react-native-orientation-locker/-/react-native-orientation-locker-1.0.10.tgz#7ab581c34e604a3856e314d3a5d4e0683164ca44"
