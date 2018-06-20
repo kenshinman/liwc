@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { Text, Image, StyleSheet, View, Dimensions, findNodeHandle, TextInputState } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  View,
+  Dimensions,
+  findNodeHandle
+} from "react-native";
 import {
   Container,
   Content,
@@ -9,7 +15,8 @@ import {
   Label,
   Input,
   Card,
-  Button
+  Button,
+  Picker
 } from "native-base";
 import ImageBg from "../Components/ImageBg";
 import * as firebase from "firebase";
@@ -24,9 +31,13 @@ class Register extends Component {
       fullname: "",
       email: "",
       phone: "",
+      title: "",
+      gender: "",
+      maritalStatus: "",
+      denomination: ""
     };
 
-    //this.database = firebase.database();
+    this.database = firebase.database();
   }
 
   handleSubmit() {
@@ -42,7 +53,9 @@ class Register extends Component {
           username: this.state.fullname,
           email: this.state.email,
           phone: this.state.phone,
-          createdAt: userId
+          createdAt: userId,
+          gender: this.state.gender,
+          title: this.state.title
         });
       if (done) {
         this.setState({ fullname: "", email: "", phone: "" });
@@ -57,11 +70,15 @@ class Register extends Component {
 
   focusTextInput(node) {
     try {
-      TextInputState.focusTextInput(findNodeHandle(node))
-    } catch(e) {
+      TextInputState.focusTextInput(findNodeHandle(node));
+    } catch (e) {
       alert(e.message);
-      console.log("Couldn't focus text input: ", e.message)
+      console.log("Couldn't focus text input: ", e.message);
     }
+  }
+
+  onValueChange(value) {
+    this.setState({ title: value });
   }
 
   render() {
@@ -70,33 +87,42 @@ class Register extends Component {
         <View>
           <DropdownAlert ref={ref => (this.dropdown = ref)} />
         </View>
-        <Image
-          source={require("../../assets/app_bg.jpg")}
-          resizeMode="cover"
-          style={styles.bg}
-        >
+        <View style={{ flex: 1, backgroundColor: "#fff" }}>
           <Text style={styles.legend}>Registration Form</Text>
           <View style={styles.form}>
-            <Item style={styles.inputWrap}>
+            <Item>
+              {/* <Label>Title</Label> */}
+              <Picker
+                iosHeader="Select one"
+                selectedValue={
+                  this.state.title // mode="dropdown"
+                }
+                onValueChange={value => this.setState({ title: value })}>
+                <Picker.Item label="Select Title" value="" />
+                <Picker.Item label="Brother" value="brother" />
+                <Picker.Item label="Sister" value="sister" />
+              </Picker>
+            </Item>
+            <Item floatingLabel style={styles.inputWrap}>
               <Label style={styles.label}>Full Name</Label>
               <Input
-                ref='fullname'
+                ref="fullname"
                 style={styles.input}
                 onChangeText={fullname => this.setState({ fullname })}
                 value={this.state.fullname}
-                autoFocus={true}
+                autoFocus={false}
                 keyboardType="default"
                 returnKeyType="next"
                 returnKeyLabel="Next"
                 onSubmitEditing={event => {
-                  this.focusTextInput(this.refs.email)
+                  this.focusTextInput(this.refs.email);
                 }}
               />
             </Item>
-            <Item style={styles.inputWrap}>
+            <Item floatingLabel style={styles.inputWrap}>
               <Label style={styles.label}>Email</Label>
               <Input
-                ref='email'
+                ref="email"
                 style={styles.input}
                 onChangeText={email => this.setState({ email })}
                 value={this.state.email}
@@ -105,7 +131,9 @@ class Register extends Component {
                 returnKeyType="next"
               />
             </Item>
-            <Item style={styles.inputWrap} last>
+            <Item
+              floatingLabel
+              style={[styles.inputWrap, { marginBottom: 20 }]}>
               <Label style={styles.label}>Phone</Label>
               <Input
                 style={styles.input}
@@ -115,18 +143,45 @@ class Register extends Component {
                 returnKeyType="go"
               />
             </Item>
+            <Item>
+              {/* <Label>Title</Label> */}
+              <Picker
+                iosHeader="Select Gender"
+                selectedValue={
+                  this.state.gender // mode="dropdown"
+                }
+                onValueChange={value => this.setState({ gender: value })}>
+                <Picker.Item label="Select Gender" value="" />
+                <Picker.Item label="Male" value="male" />
+                <Picker.Item label="Female" value="female" />
+              </Picker>
+            </Item>
+
+            {/* <Item>
+              <Picker
+                iosHeader="Select one"
+                selectedValue={
+                  this.state.title // mode="dropdown"
+                }
+                onValueChange={this.onValueChange.bind(this)}>
+                <Picker.Item label="Select Title" value="" />
+                <Picker.Item label="Brother" value="brother" />
+                <Picker.Item label="Sister" value="sister" />
+              </Picker>
+            </Item> */}
 
             <Button
               full
-              light
+              dark
               bordered
               rounded
-              onPress={() => this.handleSubmit()}
-            >
+              onPress={
+                () => this.handleSubmit() // style={{ marginTop: 20 }}
+              }>
               <Text style={styles.btnTxt}>Submit</Text>
             </Button>
           </View>
-        </Image>
+        </View>
       </Container>
     );
   }
@@ -137,33 +192,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10
   },
-  label: {
-    color: "rgba(225,225,225, 0.5)"
-  },
-  bg: {
-    flex: 1,
-    justifyContent: "flex-start",
-    width
-  },
   inputWrap: {
-    marginVertical: 5,
-    borderWidth: 2,
-    borderColor: "#fff"
+    marginLeft: 10
   },
   input: {
-    borderStyle: "solid",
-    color: "#f3f3f3"
-  },
-  legend: {
-    fontSize: 22,
-    color: "#f6f6f6",
-    textAlign: "center",
-    marginVertical: 10
-  },
-  btnTxt: {
-    color: "#fff"
-  },
-  btn: {}
+    height: 60
+  }
 });
 
 export default Register;
