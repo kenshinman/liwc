@@ -15,6 +15,10 @@ EStyleSheet.build({
 const prefix = Platform.OS == "android" ? "liwc://liwc/" : "liwc://";
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentWillMount() {
     Orientation.lockToPortrait();
     OneSignal.configure({});

@@ -9,7 +9,7 @@ import {
 import { Button, Icon } from "native-base";
 // import Icon from "react-native-vector-icons/Ionicons";
 import { Col, Row, Grid } from "react-native-easy-grid";
-import * as firebase from "firebase";
+// import * as firebase from "firebase";
 import CountDownTimer from "react_native_countdowntimer";
 import HomeButton from "../Components/HomeButton";
 
@@ -30,24 +30,23 @@ export default class Home extends Component {
       }
     };
 
-    this.database = firebase.database();
+    // this.database = firebase.database();
   }
 
   componentWillMount() {
     //AsyncStorage.removeItem("meta");
-    const liveRef = this.database.ref("liveBroadcast");
-    liveRef.on("value", snap => {
-      snap.forEach(data => {
-        AsyncStorage.setItem("liveData", JSON.stringify(data));
-      });
-    });
-
-    const metaRef = this.database.ref("meta");
-    metaRef.on("value", snap => {
-      if (AsyncStorage.setItem("meta", JSON.stringify(snap))) {
-        this.getData();
-      }
-    });
+    // const liveRef = this.database.ref("liveBroadcast");
+    // liveRef.on("value", snap => {
+    //   snap.forEach(data => {
+    //     AsyncStorage.setItem("liveData", JSON.stringify(data));
+    //   });
+    // });
+    // const metaRef = this.database.ref("meta");
+    // metaRef.on("value", snap => {
+    //   if (AsyncStorage.setItem("meta", JSON.stringify(snap))) {
+    //     this.getData();
+    //   }
+    // });
   }
 
   getData() {
@@ -72,26 +71,21 @@ export default class Home extends Component {
                 LAGOS{"\n"}INTERNATIONAL{"\n"}WORSHIP{"\n"}CONFERENCE
               </Text>
               <View style={styles.space} />
-              {this.state.meta.date ? (
-                <CountDownTimer
-                  style={{ marginTop: 20 }}
-                  date={this.state.meta.date}
-                  days={{ plural: " Days", singular: "Day " }}
-                  hours=""
-                  mins=""
-                  segs=""
-                  daysStyle={[styles.time, styles.days]}
-                  hoursStyle={[styles.time, styles.hours]}
-                  minsStyle={[styles.time, styles.mins]}
-                  secsStyle={[styles.time, styles.secs]}
-                  firstColonStyle={styles.colon}
-                  secondColonStyle={styles.colon}
-                />
-              ) : (
-                <Text style={{ color: "#fff", fontWeight: "600" }}>
-                  Conference Starts in...
-                </Text>
-              )}
+
+              <CountDownTimer
+                style={{ marginTop: 20 }}
+                date={"2018-06-29T00:00:00+00:00"}
+                days={{ plural: " Days", singular: "Day " }}
+                hours="hrs"
+                mins=""
+                segs=""
+                daysStyle={[styles.time, styles.days]}
+                hoursStyle={[styles.time, styles.hours]}
+                minsStyle={[styles.time, styles.mins]}
+                secsStyle={[styles.time, styles.secs]}
+                firstColonStyle={styles.colon}
+                secondColonStyle={styles.colon}
+              />
             </Row>
             <Row style={styles.bottomRow} size={25}>
               <Col style={styles.buttonCol}>

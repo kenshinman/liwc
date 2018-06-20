@@ -1,9 +1,11 @@
-import axios from "axios";
-// import jwt_decode from "jwt-decode";
+import firebase from "firebase";
 
-export const LOGIN_USER = "LOGIN_USER";
-export const LOGGING_IN = "LOGGING_IN";
-export const LOGOUT_USER = "LOGOUT_USER";
-export const REGISTER_USER = "REGISTER_USER";
-export const GET_ERRORS = "GET_ERRORS";
-export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const FETCH_DATA = "FETCH_DATA";
+export const SET_DATA = "SET_DATA";
+export const FETCHING_DATA = "FETCHING_DATA";
+
+const db = firebase.database();
+
+export const fetchData = segment => dispatch => {
+  dispatch({ type: FETCHING_DATA });
+};

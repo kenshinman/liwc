@@ -30,6 +30,7 @@
     "react-redux": "^5.0.7",
     "react_native_countdowntimer": "^1.0.2",
     "redux": "^4.0.0",
+    "redux-devtools-extension": "^2.13.3",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0"
   },

@@ -78,7 +78,7 @@ const RootNavigator = createStackNavigator(
     },
     Ministers: {
       screen: Ministers,
-      path: "ministers/1",
+      path: "ministers",
       navigationOptions: ({ navigation }) => ({
         headerTitle: "MINISTERS"
       })
@@ -87,7 +87,7 @@ const RootNavigator = createStackNavigator(
       screen: Minister,
       path: "minister/:index",
       navigationOptions: ({ navigation }) => ({
-        headerTitle: `${navigation.state.params.minister.name}`
+        headerTitle: `Speaker`
       })
     },
     Location: {

@@ -1,48 +1,67 @@
 import React, { Component } from "react";
-import { Text, Image, StyleSheet } from "react-native";
-import {
-  Container,
-  Content,
-  H1,
-  H2,
-  Body,
-  H3,
-  Card,
-  CardItem,
-  Icon
-} from "native-base";
+import { connect } from "react-redux";
+import { Text, Image, ActivityIndicator } from "react-native";
+import { Container, Content, Body, Card, CardItem } from "native-base";
 import ImageBg from "../Components/ImageBg";
 import HTMLView from "react-native-htmlview";
-import EStyleSheet from 'react-native-extended-stylesheet';
+import EStyleSheet from "react-native-extended-stylesheet";
+import {
+  setCurrentMinister,
+  fetchMinisters
+} from "../actions/ministersActions";
 
-const Minister = props => {
-  const {
-    name,
-    designation,
-    img,
-    location,
-    profile
-  } = props.navigation.state.params.minister;
-  return (
-    <Container key={name}>
-      <Content>
-        <ImageBg height={250}>
-          <Image style={styles.avatar} source={{ uri: img }} />
-          <Text style={styles.name}>{name}</Text>
-          <Text style={styles.title}>{designation}</Text>
-          <Text style={styles.location}>{location}</Text>
-        </ImageBg>
-        <Card style={styles.content}>
-          <CardItem>
-            <Body>
-              <HTMLView value={profile} stylesheet={styles} />
-            </Body>
-          </CardItem>
-        </Card>
-      </Content>
-    </Container>
-  );
-};
+class Minister extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      index: props.navigation.state.params.index,
+      minister: {}
+    };
+  }
+
+  componentWillMount() {
+    if (this.props.ministers.ministers.length == 0) {
+      this.props.fetchMinisters();
+    } else {
+      this.setState({
+        minister: this.props.ministers.ministers[this.state.index]
+      });
+    }
+  }
+  render() {
+    const {
+      name,
+      designation,
+      img,
+      location,
+      profile
+    } = this.props.ministers.ministers[this.state.index];
+    console.log(this.props);
+    if (this.props.ministers.fetchingMinisters) {
+      return <ActivityIndicator size="large" color="yellow" />;
+    }
+    return (
+      <Container key={name}>
+        <Content>
+          <ImageBg height={250}>
+            <Image style={styles.avatar} source={{ uri: img }} />
+            <Text style={styles.name}>{name}</Text>
+            <Text style={styles.title}>{designation}</Text>
+            <Text style={styles.location}>{location}</Text>
+          </ImageBg>
+          <Card style={styles.content}>
+            <CardItem>
+              <Body>
+                <HTMLView value={profile} stylesheet={styles} />
+              </Body>
+            </CardItem>
+          </Card>
+        </Content>
+      </Container>
+    );
+  }
+}
 
 const styles = EStyleSheet.create({
   p: {
@@ -90,4 +109,11 @@ const styles = EStyleSheet.create({
   }
 });
 
-export default Minister;
+const mapStateToprops = state => ({
+  ministers: state.ministers
+});
+
+export default connect(
+  mapStateToprops,
+  { setCurrentMinister, fetchMinisters }
+)(Minister);

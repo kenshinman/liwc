@@ -1,10 +1,8 @@
 import { combineReducers } from "redux";
-import tempReducer from "./tempReducer";
-import authReducer from "./authReducer";
-import postsReducer from "./postsReducer";
+import dataReducer from "./dataReducer";
+import ministers from "./ministersReducer";
 
 export default combineReducers({
-  temp: tempReducer,
-  auth: authReducer,
-  posts: postsReducer
+  data: dataReducer,
+  ministers
 });

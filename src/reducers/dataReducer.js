@@ -1,7 +1,4 @@
-const initialState = {
-  title: "My App",
-  friends: [{ id: 1, name: "Kenshin" }, { id: 2, name: "Jedi" }]
-};
+const initialState = {};
 
 export default function(state = initialState, action) {
   switch (action.type) {

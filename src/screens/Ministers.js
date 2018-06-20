@@ -1,67 +1,41 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchMinisters } from "../actions/ministersActions";
 import {
   ScrollView,
   Text,
-  Image,
   StyleSheet,
   AsyncStorage,
-  RefreshControl,
-  ToastAndroid
+  RefreshControl
 } from "react-native";
 import {
   Container,
-  Content,
-  Card,
   H1,
   List,
   ListItem,
   Thumbnail,
-  Left,
   Body,
   Right,
   Icon,
   Spinner
 } from "native-base";
-import * as firebase from "firebase";
-import { OS } from "../helpers/Helpers";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDZdd1IV_7VQ0yivbe-SeTRNkItcLxtsfY",
-  authDomain: "social-app-9bae0.firebaseapp.com",
-  databaseURL: "https://social-app-9bae0.firebaseio.com",
-  projectId: "social-app-9bae0",
-  storageBucket: "social-app-9bae0.appspot.com"
-};
-
-const firebaseApp = firebase.initializeApp(firebaseConfig);
+// import * as firebase from "firebase";
 
 class Ministers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ministers: [],
+      ministers: props.ministers.ministers,
       loading: true
     };
 
     /*this.setMinisters = this.setMinisters.bind(this);*/
-    this.database = firebase.database();
+    // this.database = firebase.database();
   }
 
-  _doRefresh() {
-    const ministersRef = this.database.ref("speakers");
-    let fresh_ministers = [];
-    ministersRef.on("value", snap => {
-      snap.forEach(minister => {
-        fresh_ministers.push(minister);
-      });
-
-      AsyncStorage.setItem("ministers", JSON.stringify(fresh_ministers));
-    });
-    this.setMinisters();
-  }
   renderList() {
-    return this.state.ministers.map(minister => {
-      const { name, designation, img, location, profile } = minister;
+    return this.props.ministers.ministers.map((minister, i) => {
+      const { name, designation, img } = minister;
 
       return (
         <ListItem
@@ -69,7 +43,7 @@ class Ministers extends Component {
           avatar
           onPress={() =>
             this.props.navigation.navigate("Minister", {
-              minister
+              index: i
             })
           }>
           <Thumbnail size={100} source={{ uri: img }} />
@@ -87,34 +61,38 @@ class Ministers extends Component {
     });
   }
 
-  setMinisters() {
-    AsyncStorage.getItem("ministers").then(json => {
-      if (!json) {
-        this._doRefresh();
-      } else {
-        let ministers = JSON.parse(json);
-        this.setState({ ministers: ministers, loading: false });
-      }
-    });
-  }
+  // setMinisters() {
+  //   AsyncStorage.getItem("ministers").then(json => {
+  //     if (!json) {
+  //       this._doRefresh();
+  //     } else {
+  //       let ministers = JSON.parse(json);
+  //       this.setState({ ministers: ministers, loading: false });
+  //     }
+  //   });
+  // }
 
   componentWillMount() {
-    this.setMinisters();
+    // this.setMinisters();
+    if (this.props.ministers.ministers.length === 0) {
+      this.props.fetchMinisters();
+    }
   }
 
   render() {
+    console.log(this.props);
     return (
       <Container>
         <ScrollView
           refreshControl={
             <RefreshControl
-              refreshing={false}
-              onRefresh={() => this._doRefresh()}
+              refreshing={this.props.ministers.fetchingMinisters}
+              onRefresh={() => this.props.fetchMinisters()}
             />
           }
           style={{ backgroundColor: "#fff" }}>
-          {this.state.loading ? (
-            <Spinner color="blue" />
+          {this.props.ministers.fetchingMinisters ? (
+            <Spinner color="yellow" />
           ) : (
             <List>
               <Text note style={styles.pullText}>
@@ -158,4 +136,11 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Ministers;
+const maStateToProps = state => ({
+  ministers: state.ministers
+});
+
+export default connect(
+  maStateToProps,
+  { fetchMinisters }
+)(Ministers);
