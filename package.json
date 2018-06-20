@@ -7,8 +7,9 @@
     "test": "jest"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-preset-react-native": "2.1.0",
-    "firebase": "^4.3.0",
+    "firebase": "3.7.5",
     "native-base": "^2.3.1",
     "react": "16.0.0-alpha.12",
     "react-native": "0.47.2",
@@ -26,7 +27,11 @@
     "react-native-vector-icons": "^4.3.0",
     "react-native-youtube": "^1.0.0-beta.3",
     "react-navigation": "^2.3.1",
-    "react_native_countdowntimer": "^1.0.2"
+    "react-redux": "^5.0.7",
+    "react_native_countdowntimer": "^1.0.2",
+    "redux": "^4.0.0",
+    "redux-persist": "^5.10.0",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "babel-jest": "20.0.3",

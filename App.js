@@ -4,6 +4,9 @@ import RootNavigator from "./src/config/routes";
 import Orientation from "react-native-orientation-locker";
 import EStyleSheet from "react-native-extended-stylesheet";
 import OneSignal from "react-native-onesignal";
+import { Provider } from "react-redux";
+import { store, persistor } from "./src/store";
+import { PersistGate } from "redux-persist/lib/integration/react";
 
 EStyleSheet.build({
   $primaryColor: "#4534fe"
@@ -18,10 +21,14 @@ export default class App extends Component {
   }
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <StatusBar backgroundColor="black" />
-        <RootNavigator uriPrefix={prefix} key="nav" />
-      </View>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <View style={{ flex: 1 }}>
+            <StatusBar backgroundColor="black" />
+            <RootNavigator uriPrefix={prefix} />
+          </View>
+        </PersistGate>
+      </Provider>
     );
   }
 }
