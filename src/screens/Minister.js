@@ -4,7 +4,7 @@ import { Text, Image, ActivityIndicator } from "react-native";
 import { Container, Content, Body, Card, CardItem } from "native-base";
 import ImageBg from "../Components/ImageBg";
 import HTMLView from "react-native-htmlview";
-import { CachedImage } from "react-native-cached-image";
+// import { Image } from "react-native-cached-image";
 import EStyleSheet from "react-native-extended-stylesheet";
 import {
   setCurrentMinister,
@@ -46,7 +46,7 @@ class Minister extends Component {
       <Container key={name}>
         <Content>
           <ImageBg height={250}>
-            <CachedImage style={styles.avatar} source={{ uri: img }} />
+            <Image style={styles.avatar} source={{ uri: img }} />
             <Text style={styles.name}>{name}</Text>
             <Text style={styles.title}>{designation}</Text>
             <Text style={styles.location}>{location}</Text>
