@@ -48,7 +48,8 @@ class Media extends Component {
           <Grid>
             <Row>
               <Col>
-                <TouchableWithoutFeedback onPress={() => null}>
+                <TouchableWithoutFeedback
+                  onPress={() => this.props.navigation.navigate("VideoStream")}>
                   <Card style={styles.cardBtn}>
                     <CardItem>
                       <Body
@@ -66,7 +67,7 @@ class Media extends Component {
                   </Card>
                 </TouchableWithoutFeedback>
               </Col>
-              <Col>
+              {/* <Col>
                 <Card style={styles.cardBtn}>
                   <CardItem>
                     <Body
@@ -82,9 +83,9 @@ class Media extends Component {
                     </Body>
                   </CardItem>
                 </Card>
-              </Col>
+              </Col> */}
             </Row>
-            <Row>
+            {/* <Row>
               <Col>
                 <Card style={styles.cardBtn}>
                   <CardItem>
@@ -105,7 +106,7 @@ class Media extends Component {
               <Col>
                 <View />
               </Col>
-            </Row>
+            </Row> */}
           </Grid>
         </Content>
       </Container>

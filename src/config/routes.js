@@ -12,7 +12,7 @@ import { Tab1, Tab2, Tab3 } from "../screens/Schedule";
 import Ministers from "../screens/Ministers";
 import Minister from "../screens/Minister";
 import Location from "../screens/Location";
-import Media from "../screens/Media";
+import Media, { LiveVideo } from "../screens/Media";
 import Register from "../screens/Register";
 /*import About from '../screens/About';*/
 
@@ -102,6 +102,13 @@ const RootNavigator = createStackNavigator(
       path: "media",
       navigationOptions: ({ navigation }) => ({
         headerTitle: "MEDIA"
+      })
+    },
+    VideoStream: {
+      screen: LiveVideo,
+      path: "media/live",
+      navigationOptions: ({ navigation }) => ({
+        headerTitle: "LIVE"
       })
     },
     Register: {
