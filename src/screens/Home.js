@@ -11,7 +11,7 @@ import { Button, Icon } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
 // import * as firebase from "firebase";
 import CountDownTimer from "react_native_countdowntimer";
-import HomeButton from "../Components/HomeButton";
+// import HomeButton from "../Components/HomeButton";
 
 import EStyleSheet from "react-native-extended-stylesheet";
 
