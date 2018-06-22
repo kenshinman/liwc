@@ -2,6 +2,7 @@ package com.liwc2017;
 
 import android.app.Application;
 
+import com.airbnb.android.react.maps.MapsPackage;
 import com.facebook.react.ReactApplication;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.rpt.reactnativecheckpackageinstallation.CheckPackageInstallationPackage;
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new MapsPackage(),
             new ReactNativeOneSignalPackage(),
             new CheckPackageInstallationPackage(),
             new ReactNativeYouTube(),

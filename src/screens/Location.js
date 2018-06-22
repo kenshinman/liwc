@@ -14,7 +14,7 @@ import { Container, Card, CardItem, Body } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import Icon from "react-native-vector-icons/Ionicons";
 import getDirections from "react-native-google-maps-directions";
-// import MapView from "react-native-maps";
+import MapView from "react-native-maps";
 import { OS } from "../helpers/Helpers";
 import { AppInstalledChecker } from "react-native-check-app-install";
 
@@ -114,7 +114,7 @@ class Location extends Component {
     return (
       <Container>
         <View style={styles.container}>
-          {/* <MapView
+          <MapView
             style={styles.map}
             customMapStyle={mapStyle}
             initialRegion={{
@@ -124,8 +124,7 @@ class Location extends Component {
               longitudeDelta: LONGITUDE_DELTA
             }}
             minZoomLevel={4}
-            maxZoomLevel={20}
-          >
+            maxZoomLevel={20}>
             <MapView.Marker
               onPress={e => console.log(e)}
               title="RCCG King's Court"
@@ -136,7 +135,7 @@ class Location extends Component {
                 longitude: 3.425604
               }}
             />
-          </MapView> */}
+          </MapView>
         </View>
         <Card style={styles.addressBlock}>
           <CardItem>

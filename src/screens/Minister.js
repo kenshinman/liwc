@@ -31,6 +31,10 @@ class Minister extends Component {
     }
   }
   render() {
+    console.log(this.props);
+    if (this.props.ministers.fetchingMinisters) {
+      return <ActivityIndicator size="large" color="yellow" />;
+    }
     const {
       name,
       designation,
@@ -38,10 +42,6 @@ class Minister extends Component {
       location,
       profile
     } = this.props.ministers.ministers[this.state.index];
-    console.log(this.props);
-    if (this.props.ministers.fetchingMinisters) {
-      return <ActivityIndicator size="large" color="yellow" />;
-    }
     return (
       <Container key={name}>
         <Content>
