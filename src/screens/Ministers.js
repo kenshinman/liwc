@@ -7,7 +7,8 @@ import {
   Text,
   StyleSheet,
   AsyncStorage,
-  RefreshControl
+  RefreshControl,
+  Image
 } from "react-native";
 import {
   Container,
