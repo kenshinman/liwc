@@ -74,7 +74,7 @@ export default class Home extends Component {
 
               <CountDownTimer
                 style={{ marginTop: 20 }}
-                date={"2018-06-29T00:00:00+00:00"}
+                date={"2018-06-29T00:16:00+00:00"}
                 days={{ plural: " Days", singular: "Day " }}
                 hours="hrs"
                 mins=""

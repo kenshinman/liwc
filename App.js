@@ -21,7 +21,8 @@ export default class App extends Component {
 
   componentWillMount() {
     Orientation.lockToPortrait();
-    OneSignal.configure();
+    OneSignal.init("875cab67-b11f-4589-97a9-3929eed99aca");
+    // OneSignal.configure();
   }
   render() {
     return (

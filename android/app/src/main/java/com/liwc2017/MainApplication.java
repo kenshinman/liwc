@@ -7,7 +7,6 @@ import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.rpt.reactnativecheckpackageinstallation.CheckPackageInstallationPackage;
 import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 import com.showlocationservicesdialogbox.LocationServicesDialogBoxPackage;
-import com.airbnb.android.react.maps.MapsPackage;
 import org.wonday.orientation.OrientationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -34,7 +33,6 @@ public class MainApplication extends Application implements ReactApplication {
             new CheckPackageInstallationPackage(),
             new ReactNativeYouTube(),
             new LocationServicesDialogBoxPackage(),
-            new MapsPackage(),
             new OrientationPackage(),
             new VectorIconsPackage()
       );

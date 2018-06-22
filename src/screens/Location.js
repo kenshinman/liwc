@@ -10,26 +10,13 @@ import {
   TouchableWithoutFeedback,
   Alert
 } from "react-native";
-import {
-  Container,
-  Content,
-  H3,
-  Card,
-  CardItem,
-  Body,
-  Button,
-  Right,
-  Footer
-} from "native-base";
+import { Container, Card, CardItem, Body } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import Icon from "react-native-vector-icons/Ionicons";
 import getDirections from "react-native-google-maps-directions";
-import MapView from "react-native-maps";
+// import MapView from "react-native-maps";
 import { OS } from "../helpers/Helpers";
-import {
-  AppInstalledChecker,
-  CheckPackageInstallation
-} from "react-native-check-app-install";
+import { AppInstalledChecker } from "react-native-check-app-install";
 
 import { mapStyle } from "../helpers/mapStyle";
 
@@ -127,7 +114,7 @@ class Location extends Component {
     return (
       <Container>
         <View style={styles.container}>
-          <MapView
+          {/* <MapView
             style={styles.map}
             customMapStyle={mapStyle}
             initialRegion={{
@@ -149,7 +136,7 @@ class Location extends Component {
                 longitude: 3.425604
               }}
             />
-          </MapView>
+          </MapView> */}
         </View>
         <Card style={styles.addressBlock}>
           <CardItem>
@@ -168,8 +155,7 @@ class Location extends Component {
             onPress={() => {
               //console.log(uberString);
               this.uberInstalled(uberString);
-            }}
-          >
+            }}>
             <Image
               resizeMode="contain"
               style={styles.icon}
@@ -189,8 +175,7 @@ class Location extends Component {
                 style={[
                   styles.strong,
                   { color: "rgba(41, 128, 185,1.0)", fontSize: 8 }
-                ]}
-              >
+                ]}>
                 Use Map
               </Text>
             </View>

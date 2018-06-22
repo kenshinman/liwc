@@ -148,7 +148,6 @@ dependencies {
     compile project(':react-native-check-app-install')
     compile project(':react-native-youtube')
     compile project(':react-native-android-location-services-dialog-box')
-    compile project(':react-native-maps')
     compile project(':react-native-orientation-locker')
     compile project(':react-native-vector-icons')
     compile fileTree(dir: "libs", include: ["*.jar"])
