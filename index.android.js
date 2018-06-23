@@ -1,17 +1,12 @@
-import React, { Component } from 'react';
-import {
-  AppRegistry,  
-} from 'react-native';
+import React, { Component } from "react";
+import { AppRegistry } from "react-native";
 
-import App from './App';
+import App from "./App";
 
 export default class liwc2017 extends Component {
   render() {
-    return <App/>;
-    
+    return <App />;
   }
 }
 
-
-
-AppRegistry.registerComponent('liwc2017', () => liwc2017);
+AppRegistry.registerComponent("liwc2017", () => liwc2017);

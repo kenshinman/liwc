@@ -1,23 +1,17 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  Platform,
-  AsyncStorage,
-  ImageBackground
-} from "react-native";
+import { View, Text, Platform, ImageBackground } from "react-native";
+import { connect } from "react-redux";
 import { Button, Icon } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
-// import * as firebase from "firebase";
+import { fetchDB } from "../actions/dbActions";
 import CountDownTimer from "react_native_countdowntimer";
-// import HomeButton from "../Components/HomeButton";
 
 import EStyleSheet from "react-native-extended-stylesheet";
 
 const os = Platform.OS == "ios" ? "ios" : "md";
 
 console.disableYellowBox = true;
-export default class Home extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,36 +22,14 @@ export default class Home extends Component {
         address: ""
       }
     };
-
-    // this.database = firebase.database();
   }
 
   componentWillMount() {
-    //AsyncStorage.removeItem("meta");
-    // const liveRef = this.database.ref("liveBroadcast");
-    // liveRef.on("value", snap => {
-    //   snap.forEach(data => {
-    //     AsyncStorage.setItem("liveData", JSON.stringify(data));
-    //   });
-    // });
-    // const metaRef = this.database.ref("meta");
-    // metaRef.on("value", snap => {
-    //   if (AsyncStorage.setItem("meta", JSON.stringify(snap))) {
-    //     this.getData();
-    //   }
-    // });
+    this.props.fetchDB();
   }
 
-  getData() {
-    AsyncStorage.getItem("meta").then(json => {
-      if (json) {
-        this.setState({ meta: JSON.parse(json) });
-      } else {
-        console.log("meta => nothing");
-      }
-    });
-  }
   render() {
+    console.log("DB: ", this.props.db);
     return (
       <ImageBackground
         style={styles.imgBg}
@@ -263,3 +235,12 @@ const styles = EStyleSheet.create({
     backgroundColor: "transparent"
   }
 });
+
+const mapStateToProps = state => ({
+  db: state.db
+});
+
+export default connect(
+  mapStateToProps,
+  { fetchDB }
+)(Home);
