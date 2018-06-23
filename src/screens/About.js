@@ -1,10 +1,16 @@
 import React, { Component } from "react";
-import { Image, Text, StyleSheet } from "react-native";
+import { Image, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { Container, Content, H1, Card, CardItem, Body } from "native-base";
-import EStyleSheet from "react-native-extended-stylesheet";
 import ImageBg from "../Components/ImageBg";
+import HTMLView from "react-native-htmlview";
+import { connect } from "react-redux";
+import { fetchDB } from "../actions/dbActions";
+import EStyleSheet from "react-native-extended-stylesheet";
 
-const About = () => {
+const About = ({ db, fetchDB }) => {
+  if (db.fetchingDb) {
+    return <ActivityIndicator size="large" />;
+  }
   return (
     <Container>
       <Content>
@@ -12,42 +18,7 @@ const About = () => {
         <Card>
           <CardItem>
             <Body>
-              <Text allowFontScaling={true} style={styles.p}>
-                Everyday news headlines break intermittently with reports of
-                unprecedented events around the world. From severe weather
-                conditions to increased terrorist activities. Economic decline
-                and depression to political instability. These events take on
-                natural, political, social, religious, economic and cultural
-                dimensions and many of them without human answers or
-                understanding.
-              </Text>
-              <Text allowFontScaling={true} style={styles.p}>
-                As believers we are forewarned by the Holy Scriptures of
-                perilous times such as these (2 Timothy 3 v 1).
-              </Text>
-              <Text allowFontScaling={true} style={styles.p}>
-                Nonetheless, Isaiah 60:1-2 testifies that as the Earth becomes
-                engulfed in gross darkness, simultaneously, the Church will rise
-                and shine brighter and brighter. So the good news is that
-                notwithstanding how the earth groans under the strain of sin and
-                brokenness, we stand on the brink of what could be the greatest
-                revival and harvests of souls before the coming of our Lord and
-                Saviour, Jesus Christ.
-              </Text>
-              <Text allowFontScaling={true} style={styles.p}>
-                Worship through the ministry of music and the arts will play a
-                key role in this revival. It is with this in mind, that the
-                Lagos International Worship Conference has been put together –
-                to equip, prepare and fortify music ministers, worshippers and
-                believers with requisite knowledge and faith-based principles
-                for effectiveness and relevance in these last days.
-              </Text>
-              <Text allowFontScaling={true} style={styles.p}>
-                We earnestly urge you to join this army of worshippers as we
-                come to be instructed and imparted by the Holy Ghost. Shalom!
-              </Text>
-
-              <Text style={styles.p}>Shalom</Text>
+              <HTMLView value={db.meta.about} stylesheet={styles} />
             </Body>
           </CardItem>
         </Card>
@@ -56,13 +27,57 @@ const About = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   p: {
     fontSize: 16,
-    fontFamily: "Oxygen-Regular",
-    textAlign: "auto",
-    paddingVertical: 5
+    color: "#222",
+    fontWeight: "200",
+    textAlign: "justify"
+  },
+  avatar: {
+    height: 120,
+    width: 120,
+    borderColor: "#fff",
+    // borderWidth: 3,
+    borderRadius: 60
+  },
+  name: {
+    color: "#fff",
+    fontSize: 22,
+    textAlign: "center",
+    fontFamily: "Dosis-Medium"
+  },
+  title: {
+    color: "#fff",
+    fontSize: 12,
+    textAlign: "center",
+    fontFamily: "Dosis-Bold"
+  },
+  location: {
+    fontSize: 10,
+    color: "#fff",
+    marginVertical: 10
+  },
+  content: {
+    marginHorizontal: 5,
+    fontFamily: "Oxygen-Regular"
+  },
+  icon: {
+    fontSize: 12,
+    color: "#fff"
+  },
+  p: {
+    fontFamily: "Oxygen-Light",
+    fontSize: 16,
+    textAlign: "justify"
   }
 });
 
-export default About;
+const mstp = state => ({
+  db: state.db
+});
+
+export default connect(
+  mstp,
+  {}
+)(About);
