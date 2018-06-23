@@ -7,7 +7,6 @@ import {
   ImageBackground
 } from "react-native";
 import { Button, Icon } from "native-base";
-// import Icon from "react-native-vector-icons/Ionicons";
 import { Col, Row, Grid } from "react-native-easy-grid";
 // import * as firebase from "firebase";
 import CountDownTimer from "react_native_countdowntimer";
