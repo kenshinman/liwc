@@ -82,7 +82,7 @@ class Media extends Component {
               <Row>
                 <Col>
                   <TouchableWithoutFeedback
-                    onPress={() => this.props.navigation.navigate("Photos")}>
+                    onPress={() => this.props.navigation.navigate("PhotoGrid")}>
                     <Card style={styles.cardBtn}>
                       <CardItem>
                         <Body

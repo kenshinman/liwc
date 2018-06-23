@@ -15,6 +15,8 @@ import Location from "../screens/Location";
 import Media from "../screens/Media";
 import Register from "../screens/Register";
 import LiveVideo from "../screens/LiveVideo";
+import Photos from "../screens/Photos";
+import PhotoGrid from "../screens/PhotoGrid";
 /*import About from '../screens/About';*/
 
 const os = Platform.OS === "ios" ? "ios" : "md";
@@ -117,6 +119,20 @@ const RootNavigator = createStackNavigator(
       path: "register",
       navigationOptions: ({ navigation }) => ({
         headerTitle: "REGISTER"
+      })
+    },
+    PhotoGrid: {
+      screen: PhotoGrid,
+      path: "grid",
+      navigationOptions: ({ navigation }) => ({
+        headerTitle: "PHOTOS"
+      })
+    },
+    Photos: {
+      screen: Photos,
+      path: "photos",
+      navigationOptions: ({ navigation }) => ({
+        header: null
       })
     }
   },
