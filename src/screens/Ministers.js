@@ -1,21 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchMinisters } from "../actions/ministersActions";
+import { fetchDB } from "../actions/dbActions";
 // import { Image } from "react-native-cached-image";
 import {
   ScrollView,
   Text,
   StyleSheet,
-  AsyncStorage,
   RefreshControl,
-  Image
+  Image,
+  ActivityIndicator
 } from "react-native";
 import {
   Container,
-  H1,
   List,
   ListItem,
-  Thumbnail,
   Body,
   Right,
   Icon,
@@ -27,16 +25,13 @@ class Ministers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ministers: props.ministers.ministers,
+      ministers: props.db.ministers,
       loading: true
     };
-
-    /*this.setMinisters = this.setMinisters.bind(this);*/
-    // this.database = firebase.database();
   }
 
   renderList() {
-    return this.props.ministers.ministers.map((minister, i) => {
+    return this.props.db.ministers.map((minister, i) => {
       const { name, designation, img } = minister;
 
       return (
@@ -67,37 +62,28 @@ class Ministers extends Component {
     });
   }
 
-  // setMinisters() {
-  //   AsyncStorage.getItem("ministers").then(json => {
-  //     if (!json) {
-  //       this._doRefresh();
-  //     } else {
-  //       let ministers = JSON.parse(json);
-  //       this.setState({ ministers: ministers, loading: false });
-  //     }
-  //   });
-  // }
-
   componentWillMount() {
-    // this.setMinisters();
-    if (this.props.ministers.ministers.length === 0) {
-      this.props.fetchMinisters();
+    if (this.props.db.ministers.length === 0) {
+      this.props.fetchDB();
     }
   }
 
   render() {
     console.log(this.props);
+    if (this.props.db.fetchingDb) {
+      return <ActivityIndicator />;
+    }
     return (
       <Container>
         <ScrollView
           refreshControl={
             <RefreshControl
-              refreshing={this.props.ministers.fetchingMinisters}
-              onRefresh={() => this.props.fetchMinisters()}
+              refreshing={this.props.db.fetchingDb}
+              onRefresh={() => this.props.fetchDB()}
             />
           }
           style={{ backgroundColor: "#fff" }}>
-          {this.props.ministers.fetchingMinisters ? (
+          {this.props.db.fetchingDb || !this.props.db.isReady ? (
             <Spinner color="yellow" />
           ) : (
             <List>
@@ -143,10 +129,10 @@ const styles = StyleSheet.create({
 });
 
 const maStateToProps = state => ({
-  ministers: state.ministers
+  db: state.db
 });
 
 export default connect(
   maStateToProps,
-  { fetchMinisters }
+  { fetchDB }
 )(Ministers);

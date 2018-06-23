@@ -8,12 +8,13 @@ import {
 } from "react-navigation";
 import Home from "../screens/Home";
 import About from "../screens/About";
-import { Tab1, Tab2, Tab3 } from "../screens/Schedule";
+import { Tab1, Tab2, Tab3 } from "../screens/Tabs";
 import Ministers from "../screens/Ministers";
 import Minister from "../screens/Minister";
 import Location from "../screens/Location";
-import Media, { LiveVideo } from "../screens/Media";
+import Media from "../screens/Media";
 import Register from "../screens/Register";
+import LiveVideo from "../screens/LiveVideo";
 /*import About from '../screens/About';*/
 
 const os = Platform.OS === "ios" ? "ios" : "md";

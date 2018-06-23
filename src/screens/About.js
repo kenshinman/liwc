@@ -8,7 +8,7 @@ import { fetchDB } from "../actions/dbActions";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 const About = ({ db, fetchDB }) => {
-  if (db.fetchingDb) {
+  if (db.fetchingDb || !db.isReady) {
     return <ActivityIndicator size="large" />;
   }
   return (

@@ -129,7 +129,7 @@ class Location extends Component {
               onPress={e => console.log(e)}
               title="RCCG King's Court"
               description="3, Keystone Bank Crescent, Victoria Island, Eti Osa, Lagos, Nigeria"
-              image={require("../../assets/marker.png")}
+              // image={require("../../assets/marker.png")}
               coordinate={{
                 latitude: 6.434602,
                 longitude: 3.425604

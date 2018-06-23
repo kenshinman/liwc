@@ -1,9 +1,17 @@
 import React, { Component } from "react";
-import { Text, AsyncStorage, RefreshControl, ScrollView } from "react-native";
+import {
+  Text,
+  AsyncStorage,
+  RefreshControl,
+  ScrollView,
+  ActivityIndicator
+} from "react-native";
+import { connect } from "react-redux";
 import { Container, Content, Spinner } from "native-base";
 import * as firebase from "firebase";
 import ScheduleCard from "../Components/ScheduleCard";
 import schedule from "../../schedule.json";
+import { fetchDB } from "../actions/dbActions";
 
 class ScheduleView extends Component {
   constructor(props) {
@@ -15,12 +23,17 @@ class ScheduleView extends Component {
   }
 
   renderItems() {
-    return this.state.schedule.schedule.map((item, i) => {
+    if (!this.props.db.isReady) return null;
+    console.log(this.props.db.schedule[this.props.day]);
+    return this.props.db.schedule[this.props.day].schedule.map((item, i) => {
       return <ScheduleCard key={i} item={item} />;
     });
   }
 
   render() {
+    if (!this.props.db.isReady) {
+      return <ActivityIndicator size="large" color="yellow" />;
+    }
     return (
       <Container style={{ marginLeft: 10 }}>
         <ScrollView
@@ -28,7 +41,7 @@ class ScheduleView extends Component {
           refreshControl={
             <RefreshControl
               refreshing={false}
-              // onRefresh={this.fetchSchedule()}
+              onRefresh={() => this.props.fetchDB()}
             />
           }>
           {this.renderItems()}
@@ -37,14 +50,12 @@ class ScheduleView extends Component {
     );
   }
 }
-const Tab1 = () => {
-  return <ScheduleView day={0} />;
-};
-const Tab2 = () => {
-  return <ScheduleView day={1} />;
-};
-const Tab3 = () => {
-  return <ScheduleView day={2} />;
-};
 
-export { Tab1, Tab2, Tab3 };
+const mstp = state => ({
+  db: state.db
+});
+
+export default connect(
+  mstp,
+  { fetchDB }
+)(ScheduleView);
