@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Container, Content, View } from "native-base";
 import YouTube from "react-native-youtube";
 import Orientation from "react-native-orientation-locker";
+import { fetchDB } from "../actions/dbActions";
 
 class LiveVideo extends Component {
   constructor(props) {
@@ -19,11 +20,9 @@ class LiveVideo extends Component {
   }
 
   componentWillMount() {
-    // AsyncStorage.getItem("liveData").then(json => {
-    //   const { audioUrl, videos } = JSON.parse(json);
-    //   console.log(audioUrl, videos);
-    //   this.setState({ videoId: videos.latest, audioUrl });
-    // });
+    if (!this.props.db.isReady) {
+      this.props.fetchDB();
+    }
   }
   render() {
     if (!this.props.db.isReady) {
@@ -92,5 +91,5 @@ const mstp = state => ({
 
 export default connect(
   mstp,
-  {}
+  { fetchDB }
 )(LiveVideo);

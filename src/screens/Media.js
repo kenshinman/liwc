@@ -1,14 +1,7 @@
 import React, { Component } from "react";
-import {
-  Text,
-  Image,
-  AsyncStorage,
-  View,
-  TouchableWithoutFeedback
-} from "react-native";
+import { Text, TouchableWithoutFeedback, View } from "react-native";
 import {
   Container,
-  Content,
   Card,
   CardItem,
   Icon,
@@ -17,33 +10,27 @@ import {
   Row,
   Body
 } from "native-base";
-import * as firebase from "firebase";
+import { fetchDB } from "../actions/dbActions";
+import { connect } from "react-redux";
 
 class Media extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isReady: false,
-      loading: true,
-      videoId: "",
-      audioUrl: ""
+      loading: true
     };
-
-    this.database = firebase.database();
   }
-
   componentWillMount() {
-    AsyncStorage.getItem("liveData").then(json => {
-      const { audioUrl, videos } = JSON.parse(json);
-      console.log(audioUrl, videos);
-      this.setState({ videoId: videos.latest, audioUrl });
-    });
+    if (!this.props.db.isReady) {
+      this.props.fetchDB();
+    }
   }
 
   render() {
     return (
       <Container>
-        <Content style={{ marginHorizontal: 5 }}>
+        <View style={{ marginHorizontal: 5, flex: 1 }}>
           <Grid>
             <Row>
               <Col>
@@ -66,26 +53,57 @@ class Media extends Component {
                   </Card>
                 </TouchableWithoutFeedback>
               </Col>
-              {/* <Col>
-                <Card style={styles.cardBtn}>
-                  <CardItem>
-                    <Body
-                      style={{
-                        justifyContent: "center",
-                        alignItems: "center"
-                      }}>
-                      <Icon
-                        name="radio"
-                        style={{ fontSize: 60, color: "green" }}
-                      />
-                      <Text>LIVE AUDIO</Text>
-                    </Body>
-                  </CardItem>
-                </Card>
-              </Col> */}
             </Row>
+            {this.props.db.media.audio.length > 0 && (
+              <Row>
+                <Col>
+                  <TouchableWithoutFeedback
+                    onPress={() => this.props.navigation.navigate("Audio")}>
+                    <Card style={styles.cardBtn}>
+                      <CardItem>
+                        <Body
+                          style={{
+                            justifyContent: "center",
+                            alignItems: "center"
+                          }}>
+                          <Icon
+                            name="radio"
+                            style={{ fontSize: 60, color: "#2980b9" }}
+                          />
+                          <Text>AUDIO</Text>
+                        </Body>
+                      </CardItem>
+                    </Card>
+                  </TouchableWithoutFeedback>
+                </Col>
+              </Row>
+            )}
+            {this.props.db.media.pictures.length > 0 && (
+              <Row>
+                <Col>
+                  <TouchableWithoutFeedback
+                    onPress={() => this.props.navigation.navigate("Photos")}>
+                    <Card style={styles.cardBtn}>
+                      <CardItem>
+                        <Body
+                          style={{
+                            justifyContent: "center",
+                            alignItems: "center"
+                          }}>
+                          <Icon
+                            name="photos"
+                            style={{ fontSize: 60, color: "#2ecc71" }}
+                          />
+                          <Text>IMAGES</Text>
+                        </Body>
+                      </CardItem>
+                    </Card>
+                  </TouchableWithoutFeedback>
+                </Col>
+              </Row>
+            )}
           </Grid>
-        </Content>
+        </View>
       </Container>
     );
   }
@@ -99,5 +117,11 @@ const styles = {
     paddingVertical: 40
   }
 };
+const mstp = state => ({
+  db: state.db
+});
 
-export default Media;
+export default connect(
+  mstp,
+  { fetchDB }
+)(Media);
