@@ -25,9 +25,9 @@ class PhotoGallery extends Component {
   }
 
   render() {
-    const media = this.props.db.media.pictures.map(url => {
+    const media = this.props.db.media.pictures.map((url, i) => {
       return {
-        source: { uri: url },
+        source: { uri: `${url}?image=${i + i + 4 + 10}` },
         caption: "this is the caption"
       };
     });

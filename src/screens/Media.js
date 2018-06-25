@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { Text, TouchableWithoutFeedback, View } from "react-native";
+import {
+  Text,
+  TouchableWithoutFeedback,
+  View,
+  ActivityIndicator
+} from "react-native";
 import {
   Container,
   Card,
@@ -28,6 +33,9 @@ class Media extends Component {
   }
 
   render() {
+    if (!this.props.db.isReady) {
+      return <ActivityIndicator size="large" color="yellow" />;
+    }
     return (
       <Container>
         <View style={{ marginHorizontal: 5, flex: 1 }}>

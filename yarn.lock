@@ -3710,6 +3710,12 @@ react-native-image-gallery@^2.1.5:
     react-mixin "^3.0.5"
     react-timer-mixin "^0.13.3"
 
+react-native-image-placeholder@^1.0.14:
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/react-native-image-placeholder/-/react-native-image-placeholder-1.0.14.tgz#74f8a74f0d9f2732cc55bc65eb9d6adb668c7c1d"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-iphone-x-helper@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.0.3.tgz#7a2f1e0574e899a0f1d426e6167fd98990083214"

@@ -23,6 +23,7 @@
     "react-native-grid-component": "^1.1.0",
     "react-native-htmlview": "^0.12.0",
     "react-native-image-gallery": "^2.1.5",
+    "react-native-image-placeholder": "^1.0.14",
     "react-native-maps": "^0.21.0",
     "react-native-onesignal": "^3.2.4",
     "react-native-orientation-locker": "^1.0.3",
